@@ -231,6 +231,7 @@ class GameEngine {
 
         this.evidenceBtn.addEventListener('click', (e) => {
             e.stopPropagation();
+            this.playBlip(); // Play sound
             this.toggleEvidence(true);
         });
 
