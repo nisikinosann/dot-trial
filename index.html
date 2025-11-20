@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ドット絵裁判</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <div id="game-container">
+        <div id="scene">
+            <img id="background" src="assets/images/courtroom_bg.png" alt="Courtroom">
+            <div id="characters">
+                <!-- Characters will be injected here -->
+            </div>
+            <div id="dialogue-box">
+                <div id="speaker-name"></div>
+                <div id="dialogue-text"></div>
+                <div id="next-indicator">▼</div>
+            </div>
+            <div id="choices-container" class="hidden">
+                <!-- Choices will be injected here -->
+            </div>
+            <div id="cut-in-overlay">
+                <img id="cut-in-image" src="assets/images/objection_bubble.png" alt="Objection!">
+                <img id="defense-objection" src="assets/images/defense_attorney-objection.png"
+                    alt="Defense Attorney Objection">
+            </div>
+
+            <!-- Evidence UI -->
+            <button id="evidence-btn">証拠品</button>
+
+            <div id="evidence-modal" class="hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>証拠品ファイル</h2>
+                        <button id="close-evidence">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <ul id="evidence-list">
+                            <!-- Items injected here -->
+                        </ul>
+                        <div id="evidence-detail">
+                            <h3 id="detail-name"></h3>
+                            <p id="detail-desc">証拠品を選択してください。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scenario.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
