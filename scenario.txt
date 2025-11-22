@@ -1,0 +1,3600 @@
+const scenario = [
+
+    // ============================================================================
+    // 序章：開廷と事件の複雑な背景（強化版）
+    // Chapter 0: Opening — massively expanded
+    // ============================================================================
+
+    {
+        id: 'start',
+        speaker: '裁判長',
+        text: 'これより、被告人・レンの「旅館秘宝消失事件」について審理を始めます。',
+        character: 'judge',
+        next: 'judge_notice_case_1'
+    },
+
+    {
+        id: 'judge_notice_case_1',
+        speaker: '裁判長',
+        text: '本件は、旅館「月影館」で発生した奇妙な盗難事件である。現場は完全に閉ざされた「蔵」。鍵は一つ、そしてその鍵を持っていたのは被告人のみ。',
+        character: 'judge',
+        next: 'judge_notice_case_2'
+    },
+
+    {
+        id: 'judge_notice_case_2',
+        speaker: '裁判長',
+        text: 'さらに、蔵の内部には争った形跡はなく、ただ一点…宝物「黄金の招き猫」が忽然と消失していた。',
+        character: 'judge',
+        next: 'judge_notice_case_3'
+    },
+
+    {
+        id: 'judge_notice_case_3',
+        speaker: '裁判長',
+        text: '検察側はこれを「被告人による計画的窃盗」と主張しているが、弁護側は強く無罪を主張している。',
+        character: 'judge',
+        next: 'prosecutor_opening_1'
+    },
+
+    // --- 検察官の冒頭陳述 強化版 ---
+
+    {
+        id: 'prosecutor_opening_1',
+        speaker: '検察官',
+        text: '今回の事件は、極めて不可解な「密室」での犯行です。',
+        character: 'prosecutor',
+        next: 'prosecutor_opening_1b'
+    },
+
+    {
+        id: 'prosecutor_opening_1b',
+        speaker: '検察官',
+        text: '密室内部に侵入できた人物は被告人ただ一人。これは動かし難い事実であります。',
+        character: 'prosecutor',
+        next: 'prosecutor_opening_2'
+    },
+
+    {
+        id: 'prosecutor_opening_2',
+        speaker: '検察官',
+        text: '舞台は老舗旅館「月影館」の地下にある蔵。昨夜の午後10時、家宝の『黄金の招き猫』が忽然と姿を消しました。',
+        character: 'prosecutor',
+        next: 'prosecutor_opening_2b'
+    },
+
+    {
+        id: 'prosecutor_opening_2b',
+        speaker: '検察官',
+        text: '蔵の鍵は一本のみ。その鍵を持っていたのは当番の被告人・レンのみでありました。',
+        character: 'prosecutor',
+        next: 'prosecutor_opening_3'
+    },
+
+    {
+        id: 'prosecutor_opening_3',
+        speaker: '検察官',
+        text: 'さらに、現場から検出された指紋は被告人のみ。物的証拠は揃いに揃っております。',
+        character: 'prosecutor',
+        next: 'prosecutor_opening_3b'
+    },
+
+    {
+        id: 'prosecutor_opening_3b',
+        speaker: '検察官',
+        text: '以上より、被告人が犯人であることは明白であると検察は主張いたします。',
+        character: 'prosecutor',
+        next: 'defense_opening_1'
+    },
+
+    // --- 弁護士の内心（あなた） ---
+
+    {
+        id: 'defense_opening_1',
+        speaker: '弁護士（あなた）',
+        text: '（状況証拠は真っ黒だ…。だが、あの画像で見た彼の目は澄んでいた。絶対に無実だ！）',
+        character: 'defense_attorney',
+        next: 'defense_opening_2'
+    },
+
+    {
+        id: 'defense_opening_2',
+        speaker: '弁護士（あなた）',
+        text: '（今回は長丁場になるぞ。些細な矛盾も見逃さず、徹底的に戦うんだ！）',
+        character: 'defense_attorney',
+        next: 'judge_call_witness_intro'
+    },
+
+    // --- 新規追加：裁判長の証人説明 ---
+
+    {
+        id: 'judge_call_witness_intro',
+        speaker: '裁判長',
+        text: 'それではこれより証人尋問に入る。まずは被告人本人の証言から聞くことにしよう。',
+        character: 'judge',
+        next: 'judge_call_witness_suspect'
+    },
+
+    // ============================================================================
+    // 第1章：被告人・レンの証言（大幅強化）
+    // ============================================================================
+
+    {
+        id: 'judge_call_witness_suspect',
+        speaker: '裁判長',
+        text: '被告人レン、前へ。',
+        character: 'judge',
+        next: 'suspect_enter'
+    },
+
+    {
+        id: 'suspect_enter',
+        speaker: '被告人（レン）',
+        text: '…僕はやってません。本当に…信じてください。',
+        character: 'suspect_image',
+        next: 'suspect_enter_2'
+    },
+
+    {
+        id: 'suspect_enter_2',
+        speaker: '被告人（レン）',
+        text: 'あの日、僕が蔵に入ったときには、すでに招き猫は無かったんです…！',
+        character: 'suspect_image',
+        next: 'suspect_testimony_1'
+    },
+
+    // --- 検察官による誘導尋問 強化版 ---
+
+    {
+        id: 'suspect_testimony_1',
+        speaker: '検察官',
+        text: 'あなたは昨夜、蔵の見回り当番でしたね？　何があったか説明しなさい。',
+        character: 'prosecutor',
+        next: 'suspect_testimony_1b'
+    },
+
+    {
+        id: 'suspect_testimony_1b',
+        speaker: '検察官',
+        text: 'まさか「気付いたら盗まれていた」なんて子供じみた言い訳はしませんよね？',
+        character: 'prosecutor',
+        next: 'suspect_testimony_2'
+    },
+
+    {
+        id: 'suspect_testimony_2',
+        speaker: '被告人（レン）',
+        text: 'いえ…その…午後10時の見回りで蔵に入った時、台座は空でした。僕は本当に驚いて…！',
+        character: 'suspect_image',
+        next: 'suspect_testimony_2b'
+    },
+
+    {
+        id: 'suspect_testimony_2b',
+        speaker: '被告人（レン）',
+        text: 'だ、誰かが先に入っていたとしか…でも鍵は僕しか持ってないはずで…。',
+        character: 'suspect_image',
+        next: 'suspect_testimony_3'
+    },
+
+    {
+        id: 'suspect_testimony_3',
+        speaker: '被告人（レン）',
+        text: '周りを見渡しましたが誰もいませんでした。ただ…奇妙な「甘い匂い」がしました。',
+        character: 'suspect_image',
+        next: 'suspect_testimony_3b'
+    },
+
+    {
+        id: 'suspect_testimony_3b',
+        speaker: '被告人（レン）',
+        text: '焦げた砂糖みたいな…嗅いだことのない種類の匂いでした。',
+        character: 'suspect_image',
+        next: 'defense_cross_exam_suspect'
+    },
+
+    // --- 弁護士（あなた）によるクロス 強化選択肢 ---
+
+    {
+        id: 'defense_cross_exam_suspect',
+        speaker: '弁護士（あなた）',
+        text: '（甘い匂い…重要な矛盾の匂いがする。この証言をもっと掘り下げる必要がある）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '匂いについて詳しく', next: 'ask_smell' },
+            { text: '蔵の鍵の状態は？', next: 'ask_key' },
+            { text: '誰か怪しい人は？', next: 'ask_shadow' },
+            { text: '蔵の内部の様子は？', next: 'ask_inside' },
+            { text: '台座の状態を詳しく', next: 'ask_pedestal' }
+        ]
+    },
+
+    // --- 各尋問分岐：ここからさらに追加 ---
+
+    {
+        id: 'ask_key',
+        speaker: '弁護士（あなた）',
+        text: '蔵に入るとき、鍵はどうなっていましたか？',
+        character: 'defense_attorney',
+        next: 'suspect_reply_key'
+    },
+
+    {
+        id: 'suspect_reply_key',
+        speaker: '被告人（レン）',
+        text: 'しっかり施錠されていました。僕が鍵を開けて入りました…だから密室なんて言われて…。',
+        character: 'suspect_image',
+        next: 'defense_cross_exam_suspect'
+    },
+
+    {
+        id: 'ask_shadow',
+        speaker: '弁護士（あなた）',
+        text: '現場付近で誰かの影を見たり、物音を聞いたりしませんでしたか？',
+        character: 'defense_attorney',
+        next: 'suspect_reply_shadow'
+    },
+
+    {
+        id: 'suspect_reply_shadow',
+        speaker: '被告人（レン）',
+        text: '誰も…いませんでした。でも…遠くの方で「カチン、カチン」という金属音が聞こえた気がします。',
+        character: 'suspect_image',
+        next: 'defense_memo_sound'
+    },
+
+    {
+        id: 'defense_memo_sound',
+        speaker: '弁護士（あなた）',
+        text: '（金属音…鍋か工具。これは後で導火線になりそうだ）',
+        character: 'defense_attorney',
+        next: 'defense_cross_exam_suspect'
+    },
+
+    {
+        id: 'ask_smell',
+        speaker: '弁護士（あなた）',
+        text: 'その「甘い匂い」というのは、もっと詳しく説明できますか？',
+        character: 'defense_attorney',
+        next: 'suspect_reply_smell'
+    },
+
+    {
+        id: 'suspect_reply_smell',
+        speaker: '被告人（レン）',
+        text: '焦げた砂糖の匂い…です。お祭りの屋台で嗅ぐような、溶かした砂糖の香りに近い気がします。',
+        character: 'suspect_image',
+        next: 'suspect_reply_smell_b'
+    },
+
+    {
+        id: 'suspect_reply_smell_b',
+        speaker: '被告人（レン）',
+        text: 'でも厨房からは遠いし…誰かが砂糖を持ち歩いてるなんて変ですよね…？',
+        character: 'suspect_image',
+        next: 'defense_suspect_finish'
+    },
+
+    {
+        id: 'ask_inside',
+        speaker: '弁護士（あなた）',
+        text: '蔵の内部に異常な点はありませんでしたか？',
+        character: 'defense_attorney',
+        next: 'suspect_reply_inside'
+    },
+
+    {
+        id: 'suspect_reply_inside',
+        speaker: '被告人（レン）',
+        text: '埃は舞ってませんでした。まるで誰かが直前に掃除したみたいに…。',
+        character: 'suspect_image',
+        next: 'suspect_reply_inside_b'
+    },
+
+    {
+        id: 'suspect_reply_inside_b',
+        speaker: '被告人（レン）',
+        text: 'でも台座の周りだけ、黒い粉が少し落ちてました。焦げた砂糖…かもしれません。',
+        character: 'suspect_image',
+        next: 'defense_cross_exam_suspect'
+    },
+
+    {
+        id: 'ask_pedestal',
+        speaker: '弁護士（あなた）',
+        text: '台座はどんな状態でしたか？　傷や汚れは？',
+        character: 'defense_attorney',
+        next: 'suspect_reply_pedestal'
+    },
+
+    {
+        id: 'suspect_reply_pedestal',
+        speaker: '被告人（レン）',
+        text: '台座の上に…少し、粘着質の跡がありました。ベタついてるような…',
+        character: 'suspect_image',
+        next: 'suspect_reply_pedestal_b'
+    },
+
+    {
+        id: 'suspect_reply_pedestal_b',
+        speaker: '被告人（レン）',
+        text: '触らなかったので確証はありませんが…飴が溶けたような…そんな跡でした。',
+        character: 'suspect_image',
+        next: 'defense_cross_exam_suspect'
+    },
+
+    {
+        id: 'defense_suspect_finish',
+        speaker: '弁護士（あなた）',
+        text: 'ありがとう、重要な手がかりになりそうだ。',
+        character: 'defense_attorney',
+        next: 'judge_call_witness_gen'
+    },
+
+    // ============================================================================
+    // 第2章：板前ゲンの証言（真犯人ルートへの伏線強化）
+    // ============================================================================
+    // ============================================================================
+    // 第2章：板前ゲンの証言（真犯人への伏線を大量に追加）
+    // ============================================================================
+
+    {
+        id: 'judge_call_witness_gen',
+        speaker: '裁判長',
+        text: '続いて、当時厨房にいた板前を入廷させます。',
+        character: 'judge',
+        next: 'gen_enter'
+    },
+
+    {
+        id: 'gen_enter',
+        speaker: '証人（板前）',
+        text: 'へい！ 板場のゲンでごぜぇやす。おハナの件じゃ世話になったが、今回は事実を話させてもらうぜ。',
+        character: 'chef',
+        next: 'gen_enter_2'
+    },
+
+    {
+        id: 'gen_enter_2',
+        speaker: '証人（板前）',
+        text: 'ま、あっしに関係あるとは思えねぇがな。事件の頃はずっと厨房で仕事してたんでね。',
+        character: 'chef',
+        next: 'gen_testimony_1'
+    },
+
+    // --- 検察官による尋問：アリバイ強化 ---
+    {
+        id: 'gen_testimony_1',
+        speaker: '検察官',
+        text: 'ゲンさん、昨夜10時の厨房の様子を教えてください。蔵のすぐ近くですよね？',
+        character: 'prosecutor',
+        next: 'gen_testimony_2'
+    },
+
+    {
+        id: 'gen_testimony_2',
+        speaker: '証人（板前）',
+        text: 'ああ。あっしは翌日の仕込みをしてたんだ。厨房からは蔵の入り口が丸見えだが、レン以外の誰も通っちゃいねぇよ。',
+        character: 'chef',
+        next: 'gen_testimony_2b'
+    },
+
+    {
+        id: 'gen_testimony_2b',
+        speaker: '証人（板前）',
+        text: 'ついでに言うとよ、蔵に入ったレンの表情は真っ青だったぜ。悪さがバレちまったガキみてぇによ。',
+        character: 'chef',
+        next: 'gen_testimony_3'
+    },
+
+    {
+        id: 'gen_testimony_3',
+        speaker: '証人（板前）',
+        text: 'それに、あの時間は「火の番」もしてたから、厨房を一歩も離れてねぇ。完璧な見張りだったってわけだ。',
+        character: 'chef',
+        next: 'gen_testimony_3b'
+    },
+
+    {
+        id: 'gen_testimony_3b',
+        speaker: '証人（板前）',
+        text: '強火にしたり、とろ火にしたりな。あっしの料理にゃ命がかかってんだ。',
+        character: 'chef',
+        next: 'defense_cross_exam_gen'
+    },
+
+    // --- 弁護士（あなた）によるクロス：選択肢強化 ---
+    {
+        id: 'defense_cross_exam_gen',
+        speaker: '弁護士（あなた）',
+        text: '（厨房を一歩も離れていない…本当にそうか？ 発言はいくつも矛盾を孕んでいる）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '仕込みの内容を詳しく', next: 'ask_cooking' },
+            { text: '本当に誰も通らなかったのか', next: 'ask_path' },
+            { text: '「火の番」とは具体的に？', next: 'ask_fire' },
+            { text: '厨房の環境について', next: 'ask_kitchen_env' },
+            { text: '砂糖の扱いについて', next: 'ask_sugar_usage' }
+        ]
+    },
+
+    // --- 質問：誰も通らなかった？ ---
+    {
+        id: 'ask_path',
+        speaker: '弁護士（あなた）',
+        text: '本当にネズミ一匹通らなかったんですか？',
+        character: 'defense_attorney',
+        next: 'gen_reply_path'
+    },
+
+    {
+        id: 'gen_reply_path',
+        speaker: '証人（板前）',
+        text: 'おうよ！ 厨房の勝手口には鈴をつけてある。開けりゃ「チリン」と鳴るんだ。一度も鳴らなかったぜ。',
+        character: 'chef',
+        next: 'gen_reply_path_b'
+    },
+
+    {
+        id: 'gen_reply_path_b',
+        speaker: '証人（板前）',
+        text: 'あの鈴は丈夫でな、誰が触っても嫌でも鳴る代物だ。へへっ、完璧な番人ってわけよ。',
+        character: 'chef',
+        next: 'defense_cross_exam_gen'
+    },
+
+    // --- 仕込み内容 ---
+    {
+        id: 'ask_cooking',
+        speaker: '弁護士（あなた）',
+        text: '具体的に何の仕込みをしていたんですか？ 料理の工程も教えてください。',
+        character: 'defense_attorney',
+        next: 'gen_reply_cooking'
+    },
+
+    {
+        id: 'gen_reply_cooking',
+        speaker: '証人（板前）',
+        text: '名物の「ブリ大根」だよ。あれは時間かけて煮込む。火を切るタイミングも厳密に決まってるから、目が離せねぇ。',
+        character: 'chef',
+        next: 'gen_reply_cooking_b'
+    },
+
+    {
+        id: 'gen_reply_cooking_b',
+        speaker: '証人（板前）',
+        text: '味を染みさせるために、何時間もじっくりな。強火、とろ火、また強火だ。',
+        character: 'chef',
+        next: 'defense_cross_exam_gen'
+    },
+
+    // --- 火の番 ---
+    {
+        id: 'ask_fire',
+        speaker: '弁護士（あなた）',
+        text: '火の番ということは、ずっとコンロの前に立っていたのですね？',
+        character: 'defense_attorney',
+        next: 'gen_reply_fire'
+    },
+
+    {
+        id: 'gen_reply_fire',
+        speaker: '証人（板前）',
+        text: '当たり前だろ？ 強火で一気に…いや、やっぱとろ火でコトコト…あ、いや強火だったか…。',
+        character: 'chef',
+        next: 'gen_reply_fire_b'
+    },
+
+    {
+        id: 'gen_reply_fire_b',
+        speaker: '証人（板前）',
+        text: 'と、とにかく火の前を離れてねぇってことよ！ トイレにも行ってねぇ！',
+        character: 'chef',
+        next: 'defense_present_evidence_1'
+    },
+
+    // --- 質問：厨房の環境 ---
+    {
+        id: 'ask_kitchen_env',
+        speaker: '弁護士（あなた）',
+        text: '厨房の環境について教えてください。火加減を調整する以外に、やることは？',
+        character: 'defense_attorney',
+        next: 'gen_reply_kitchen_env'
+    },
+
+    {
+        id: 'gen_reply_kitchen_env',
+        speaker: '証人（板前）',
+        text: '洗い物だの、道具の手入れだの、色々あるさ。ただし昨日はとくに忙しかったんでね。',
+        character: 'chef',
+        next: 'gen_reply_kitchen_env_b'
+    },
+
+    {
+        id: 'gen_reply_kitchen_env_b',
+        speaker: '証人（板前）',
+        text: 'ただしよ！ 蔵の前を通る不審者を見逃すようなことぁしねぇ。あっしは職人だからな！',
+        character: 'chef',
+        next: 'defense_cross_exam_gen'
+    },
+
+    // --- 質問：砂糖の扱い ---
+    {
+        id: 'ask_sugar_usage',
+        speaker: '弁護士（あなた）',
+        text: '砂糖は昨夜どうやって使われていたのですか？',
+        character: 'defense_attorney',
+        next: 'gen_reply_sugar'
+    },
+
+    {
+        id: 'gen_reply_sugar',
+        speaker: '証人（板前）',
+        text: '砂糖？ ありゃあ、今日の仕込みで使う予定だったからな。昨日は触ってねぇよ。',
+        character: 'chef',
+        next: 'gen_reply_sugar_b'
+    },
+
+    {
+        id: 'gen_reply_sugar_b',
+        speaker: '証人（板前）',
+        text: '砂糖壺？ ああ、あれは朝に補充したが…なんだ、関係あるのかい？',
+        character: 'chef',
+        next: 'defense_cross_exam_gen'
+    },
+
+    // ============================================================================
+    // 証拠品提示・第一の矛盾崩しへ
+    // ※ ここからゲンのアリバイが徐々に崩れ始める
+    // ============================================================================
+
+    {
+        id: 'defense_present_evidence_1',
+        speaker: '弁護士（あなた）',
+        text: '（ゲンさんの証言には、明らかな矛盾がある…！　これを突きつけるんだ！）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '証拠品をつきつける', action: 'present_evidence' }
+        ],
+        correctEvidence: 'cooking_manual',
+        successNext: 'correct_evidence_1',
+        failureNext: 'wrong_evidence_1'
+    },
+
+    {
+        id: 'wrong_evidence_1',
+        speaker: '裁判長',
+        text: '弁護人、それがどうしたというのですか？ 関連性が不明です。',
+        character: 'judge',
+        next: 'defense_present_evidence_1'
+    },
+
+    {
+        id: 'correct_evidence_1',
+        speaker: '弁護士（あなた）',
+        text: 'くらえ！ ゲンさん、この「調理手順書」を見てください！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'gen_shock_1'
+    },
+
+    {
+        id: 'gen_shock_1',
+        speaker: '証人（板前）',
+        text: 'あ？ それがどうしたってんだ！',
+        character: 'chef',
+        next: 'defense_explain_1'
+    },
+
+    {
+        id: 'defense_explain_1',
+        speaker: '弁護士（あなた）',
+        text: '当旅館のブリ大根は「一度冷まして味を染み込ませる」のが鉄則。夜10時は火を止めて冷ましている時間のはずです！',
+        character: 'defense_attorney',
+        next: 'gen_sweat_1'
+    },
+
+    {
+        id: 'gen_sweat_1',
+        speaker: '証人（板前）',
+        text: 'ぐっ…！ そ、それはだな…ちょっとタバコ休憩に行ってただけだ！ 5分くらいだ！',
+        character: 'chef',
+        next: 'gen_sweat_1b'
+    },
+
+    {
+        id: 'gen_sweat_1b',
+        speaker: '証人（板前）',
+        text: 'たった5分だ！ それ以上でも以下でもねえ！',
+        character: 'chef',
+        next: 'defense_finish_gen'
+    },
+
+    {
+        id: 'defense_finish_gen',
+        speaker: '弁護士（あなた）',
+        text: 'つまり、厨房が無人になる「空白の5分」があった。その間に誰かが通り抜けた可能性がある！',
+        character: 'defense_attorney',
+        next: 'judge_call_witness_gen_extra'
+    },
+
+    // ============================================================================
+    // 追加：ゲンのアリバイ掘り下げ（後半・まだ犯人と確定させない）
+    // ============================================================================
+
+    {
+        id: 'judge_call_witness_gen_extra',
+        speaker: '裁判長',
+        text: 'ゲン、もう少し詳しく話を聞かせてもらいたい。弁護人もよいな？',
+        character: 'judge',
+        next: 'defense_nod'
+    },
+
+    {
+        id: 'defense_nod',
+        speaker: '弁護士（あなた）',
+        text: 'もちろんです、裁判長。',
+        character: 'defense_attorney',
+        next: 'gen_extra_testimony_1'
+    },
+
+    {
+        id: 'gen_extra_testimony_1',
+        speaker: '証人（板前）',
+        text: 'ちっ…しつけぇ裁判だな。いいぜ、なんでも聞きな。',
+        character: 'chef',
+        next: 'gen_extra_testimony_2'
+    },
+
+    {
+        id: 'gen_extra_testimony_2',
+        speaker: '証人（板前）',
+        text: '確かにタバコを吸いに勝手口の外へ出た。だが、そこからじゃ蔵の入り口は見えねぇよ。灯りも届かねぇしな。',
+        character: 'chef',
+        next: 'gen_extra_testimony_3'
+    },
+
+    {
+        id: 'gen_extra_testimony_3',
+        speaker: '証人（板前）',
+        text: 'だが、誰かが通ったとしても鈴が鳴るはずだ。だから、不審者はいなかった！',
+        character: 'chef',
+        next: 'defense_cross_exam_gen_extra'
+    },
+
+    {
+        id: 'defense_cross_exam_gen_extra',
+        speaker: '弁護士（あなた）',
+        text: '（ゲン…お前はまだ何か隠している…）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '勝手口の様子', next: 'ask_backdoor' },
+            { text: 'タバコの銘柄について', next: 'ask_cigar' },
+            { text: '鈴の状態について', next: 'ask_bell_state' },
+            { text: '砂糖壺について詰める', next: 'ask_sugarpot' },
+            { text: '匂いの件を追及', next: 'ask_smell_again' }
+        ]
+    },
+
+    // --- 新規質問：勝手口 ---
+    {
+        id: 'ask_backdoor',
+        speaker: '弁護士（あなた）',
+        text: 'あなたが出た勝手口ですが、照明はついていましたか？',
+        character: 'defense_attorney',
+        next: 'gen_reply_backdoor'
+    },
+
+    {
+        id: 'gen_reply_backdoor',
+        speaker: '証人（板前）',
+        text: 'ああ、壊れててな。暗がりだ。タバコの火だけが明るかったな。',
+        character: 'chef',
+        next: 'gen_reply_backdoor_b'
+    },
+
+    {
+        id: 'gen_reply_backdoor_b',
+        speaker: '証人（板前）',
+        text: 'そもそもライトが点かねぇのは旅館のケチだ。直さねぇんだよ、あの館主。',
+        character: 'chef',
+        next: 'defense_cross_exam_gen_extra'
+    },
+
+    // --- 新規質問：タバコの銘柄 ---
+    {
+        id: 'ask_cigar',
+        speaker: '弁護士（あなた）',
+        text: 'あなたのタバコの銘柄を教えてください。',
+        character: 'defense_attorney',
+        next: 'gen_reply_cigar'
+    },
+
+    {
+        id: 'gen_reply_cigar',
+        speaker: '証人（板前）',
+        text: 'よくぞ聞いた！ あっしのは「黒火（こくび）」ってやつだ。強めの匂いが特徴だぜ。',
+        character: 'chef',
+        next: 'gen_reply_cigar_b'
+    },
+
+    {
+        id: 'gen_reply_cigar_b',
+        speaker: '証人（板前）',
+        text: 'まあ、甘い匂いとは無縁だがな！',
+        character: 'chef',
+        next: 'defense_cross_exam_gen_extra'
+    },
+
+    // --- 新規質問：鈴の状態 ---
+    {
+        id: 'ask_bell_state',
+        speaker: '弁護士（あなた）',
+        text: '勝手口の鈴、普段から鳴り方に問題はありませんでしたか？',
+        character: 'defense_attorney',
+        next: 'gen_reply_bell_state'
+    },
+
+    {
+        id: 'gen_reply_bell_state',
+        speaker: '証人（板前）',
+        text: 'まさか！ あれはあっしが毎日手入れしてるからな。錆びつきもねぇ。',
+        character: 'chef',
+        next: 'gen_reply_bell_state_b'
+    },
+
+    {
+        id: 'gen_reply_bell_state_b',
+        speaker: '証人（板前）',
+        text: '玉も丈夫でよ、軽く触れりゃ音が出るはずさ。',
+        character: 'chef',
+        next: 'defense_cross_exam_gen_extra'
+    },
+
+    // --- 新規質問：砂糖壺 ---
+    {
+        id: 'ask_sugarpot',
+        speaker: '弁護士（あなた）',
+        text: '朝に砂糖壺を補充したと言いましたね。ですが、事件後には空だったそうです。',
+        character: 'defense_attorney',
+        next: 'gen_reply_sugarpot'
+    },
+
+    {
+        id: 'gen_reply_sugarpot',
+        speaker: '証人（板前）',
+        text: 'は？ そ、そんなわけねぇだろ。誰だよ勝手に使ったのは。',
+        character: 'chef',
+        next: 'gen_reply_sugarpot_b'
+    },
+
+    {
+        id: 'gen_reply_sugarpot_b',
+        speaker: '証人（板前）',
+        text: 'あっしは使ってねぇ！ 砂糖で料理なんかしねぇ日だったんだ！',
+        character: 'chef',
+        next: 'defense_cross_exam_gen_extra'
+    },
+
+    // --- 新規質問：甘い匂いを追及 ---
+    {
+        id: 'ask_smell_again',
+        speaker: '弁護士（あなた）',
+        text: '被告人は「甘い匂い」を嗅いだと言っています。あなたは嗅ぎませんでしたか？',
+        character: 'defense_attorney',
+        next: 'gen_reply_smell_again'
+    },
+
+    {
+        id: 'gen_reply_smell_again',
+        speaker: '証人（板前）',
+        text: '甘い匂いぃ？ バカ言え、厨房にそんなもんあるわけ…いや。',
+        character: 'chef',
+        next: 'gen_reply_smell_again_b'
+    },
+
+    {
+        id: 'gen_reply_smell_again_b',
+        speaker: '証人（板前）',
+        text: '……気のせいじゃねぇか？ あっしは嗅いでねぇ！',
+        character: 'chef',
+        next: 'defense_gen_extra_finish'
+    },
+
+    {
+        id: 'defense_gen_extra_finish',
+        speaker: '弁護士（あなた）',
+        text: '（甘い匂い、砂糖壺の空、鈴の不自然さ。ゲンの証言にはさらに多くの矛盾がある…）',
+        character: 'defense_attorney',
+        next: 'judge_call_witness_kiyo'
+    },
+    // ============================================================================
+    // 第3章：仲居キヨの証言（大幅強化・ミスリードと伏線）
+    // ============================================================================
+
+    {
+        id: 'judge_call_witness_kiyo',
+        speaker: '裁判長',
+        text: '続いて、事件当夜、廊下にいた仲居のキヨを呼びます。',
+        character: 'judge',
+        next: 'kiyo_enter'
+    },
+
+    {
+        id: 'kiyo_enter',
+        speaker: '証人（仲居）',
+        text: 'ひぃぃ…お、お化け…出ませんよね…？ 仲居のキヨですぅ…。',
+        character: 'maid',
+        next: 'kiyo_enter_2'
+    },
+
+    {
+        id: 'kiyo_enter_2',
+        speaker: '証人（仲居）',
+        text: 'き、緊張して手が震えてしまいますわ…。',
+        character: 'maid',
+        next: 'kiyo_testimony_1'
+    },
+
+    // --- キヨの第一証言（強化版） ---
+    {
+        id: 'kiyo_testimony_1',
+        speaker: '検察官',
+        text: 'キヨさん、事件当夜の廊下での出来事を話してください。',
+        character: 'prosecutor',
+        next: 'kiyo_testimony_2'
+    },
+
+    {
+        id: 'kiyo_testimony_2',
+        speaker: '証人（仲居）',
+        text: 'み、見ましたの！ 10時ちょっと過ぎに、蔵の壁を「すり抜ける」白い人影を！',
+        character: 'maid',
+        next: 'kiyo_testimony_2b'
+    },
+
+    {
+        id: 'kiyo_testimony_2b',
+        speaker: '証人（仲居）',
+        text: 'あれは昔この旅館で盗賊に斬られた侍の幽霊ですぅ！ きっと黄金の招き猫を…！',
+        character: 'maid',
+        next: 'kiyo_testimony_3'
+    },
+
+    {
+        id: 'kiyo_testimony_3',
+        speaker: '証人（仲居）',
+        text: 'ううっ…怖すぎて、廊下のモップを振り回しながら後ずさりして…転びましたの…。',
+        character: 'maid',
+        next: 'kiyo_testimony_3b'
+    },
+
+    {
+        id: 'kiyo_testimony_3b',
+        speaker: '証人（仲居）',
+        text: 'でも確かに白い影は壁を抜け、甘い香りを残して消えていきましたわ…。',
+        character: 'maid',
+        next: 'defense_cross_exam_kiyo'
+    },
+
+    // --- 弁護士クロス（あなた） ---
+    {
+        id: 'defense_cross_exam_kiyo',
+        speaker: '弁護士（あなた）',
+        text: '（幽霊など存在しない。だが、彼女の証言にヒントが含まれているはずだ…！）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '人影の特徴は？', next: 'ask_ghost_look' },
+            { text: 'すり抜けた場所の詳細', next: 'ask_ghost_where' },
+            { text: '音はしたか？', next: 'ask_ghost_sound' },
+            { text: '甘い香りについて深掘り', next: 'ask_ghost_smell_detail' },
+            { text: '転んだ時の状況', next: 'ask_kiyo_fall' }
+        ]
+    },
+
+    // --- 新規質問追加：転んだ時 ---
+    {
+        id: 'ask_kiyo_fall',
+        speaker: '弁護士（あなた）',
+        text: '転んだとき、何か床に落ちていたり、異常はありませんでしたか？',
+        character: 'defense_attorney',
+        next: 'kiyo_reply_fall'
+    },
+
+    {
+        id: 'kiyo_reply_fall',
+        speaker: '証人（仲居）',
+        text: 'あっ…思い出しました！ 床が少しベタついていましたの！ モップがくっつきましたもの！',
+        character: 'maid',
+        next: 'kiyo_reply_fall_b'
+    },
+
+    {
+        id: 'kiyo_reply_fall_b',
+        speaker: '証人（仲居）',
+        text: 'でもすぐ乾いてしまったのか、その後はサラサラでしたわ。',
+        character: 'maid',
+        next: 'defense_cross_exam_kiyo'
+    },
+
+    // --- 新規質問：甘い匂いを深掘り ---
+    {
+        id: 'ask_ghost_smell_detail',
+        speaker: '弁護士（あなた）',
+        text: 'その甘い香り、もう少し詳しく説明できますか？',
+        character: 'defense_attorney',
+        next: 'kiyo_reply_smell_detail'
+    },
+
+    {
+        id: 'kiyo_reply_smell_detail',
+        speaker: '証人（仲居）',
+        text: 'うぅ…説明が難しいのですが…お祭りの屋台の「べっこう飴」みたいな匂いでしたわ！',
+        character: 'maid',
+        next: 'kiyo_reply_smell_detail_b'
+    },
+
+    {
+        id: 'kiyo_reply_smell_detail_b',
+        speaker: '証人（仲居）',
+        text: '懐かしいような、でも焦げて苦味もあるような…そんな変な香りですぅ。',
+        character: 'maid',
+        next: 'defense_cross_exam_kiyo'
+    },
+
+    // --- もともとの質問：音 ---
+    {
+        id: 'ask_ghost_sound',
+        speaker: '弁護士（あなた）',
+        text: 'その幽霊、音を立ててはいませんでしたか？',
+        character: 'defense_attorney',
+        next: 'kiyo_reply_sound'
+    },
+
+    {
+        id: 'kiyo_reply_sound',
+        speaker: '証人（仲居）',
+        text: '無音でしたわ…ヒュ〜ドロドロという音もしなくて…。あ、でもちょっとだけ…',
+        character: 'maid',
+        next: 'kiyo_reply_sound_b'
+    },
+
+    {
+        id: 'kiyo_reply_sound_b',
+        speaker: '証人（仲居）',
+        text: '「カラン…」という金属の転がるような音がしたようなしないような…。',
+        character: 'maid',
+        next: 'defense_cross_exam_kiyo'
+    },
+
+    // --- もともとの質問：見た目 ---
+    {
+        id: 'ask_ghost_look',
+        speaker: '弁護士（あなた）',
+        text: '白い人影の大きさや形を思い出してみてください。',
+        character: 'defense_attorney',
+        next: 'kiyo_reply_look'
+    },
+
+    {
+        id: 'kiyo_reply_look',
+        speaker: '証人（仲居）',
+        text: 'すごく大きくて…背中に「巨大なコブ」がありました。きっと恨みの念が凝縮されてるんですぅ…！',
+        character: 'maid',
+        next: 'kiyo_reply_look_b'
+    },
+
+    {
+        id: 'kiyo_reply_look_b',
+        speaker: '証人（仲居）',
+        text: 'それに、布のようなものがひらひらしていましたわ。白い布かしら…。',
+        character: 'maid',
+        next: 'defense_cross_exam_kiyo'
+    },
+
+    // --- もともとの質問：すり抜けた場所 ---
+    {
+        id: 'ask_ghost_where',
+        speaker: '弁護士（あなた）',
+        text: '壁をすり抜けたというのは、具体的にどこの壁ですか？',
+        character: 'defense_attorney',
+        next: 'kiyo_reply_where'
+    },
+
+    {
+        id: 'kiyo_reply_where',
+        speaker: '証人（仲居）',
+        text: '蔵の東側の壁ですわ。あそこには窓も何もないのに…スゥーっと中に溶けるように消えましたの…！',
+        character: 'maid',
+        next: 'kiyo_reply_where_b'
+    },
+
+    {
+        id: 'kiyo_reply_where_b',
+        speaker: '証人（仲居）',
+        text: 'あそこは絶対にお化けが通る秘密の道ですぅ！',
+        character: 'maid',
+        next: 'defense_present_evidence_2'
+    },
+
+    // ============================================================================
+    // 証拠品提示（2つ目の大きな矛盾崩し）
+    // ============================================================================
+
+    {
+        id: 'defense_present_evidence_2',
+        speaker: '弁護士（あなた）',
+        text: '（窓がないはずの壁をすり抜けた…？　そんなはずはない。だが図面を見れば――）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '証拠品をつきつける', action: 'present_evidence' }
+        ],
+        correctEvidence: 'floor_map',
+        successNext: 'correct_evidence_2',
+        failureNext: 'wrong_evidence_2'
+    },
+
+    {
+        id: 'wrong_evidence_2',
+        speaker: '裁判長',
+        text: '弁護人、その証拠品が今回の件とどう関係するのですか？',
+        character: 'judge',
+        next: 'defense_present_evidence_2'
+    },
+
+    {
+        id: 'correct_evidence_2',
+        speaker: '弁護士（あなた）',
+        text: 'キヨさん、この「旅館の見取り図」をご覧ください！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'kiyo_shock_2'
+    },
+
+    {
+        id: 'kiyo_shock_2',
+        speaker: '証人（仲居）',
+        text: 'ひっ…！？　図面が動いた！？　あ、ただの紙ですわね…。',
+        character: 'maid',
+        next: 'defense_explain_2'
+    },
+
+    {
+        id: 'defense_explain_2',
+        speaker: '弁護士（あなた）',
+        text: '東側の壁には、かつて使われていた「ダストシュート」の入口が隠されています。改装で塞がれていますが、人が通れる大きさです。',
+        character: 'defense_attorney',
+        next: 'prosecutor_interjection_2'
+    },
+
+    {
+        id: 'prosecutor_interjection_2',
+        speaker: '検察官',
+        text: 'ば、バカな！ そんな古い設備、今は使われていない！ ゴミ置き場に続くだけだ！',
+        character: 'prosecutor',
+        next: 'defense_finish_kiyo'
+    },
+
+    {
+        id: 'defense_finish_kiyo',
+        speaker: '弁護士（あなた）',
+        text: 'ええ。しかし犯人はそこを「通り道」に使った。そして白い服、大きな荷物…これはある人物の特徴に一致する！',
+        character: 'defense_attorney',
+        next: 'judge_call_witness_novelist'
+    },
+    // ============================================================================
+    // 第4章：小説家・西園寺の証言（完全リメイク版：選択肢から異議ありが分からない）
+    // ============================================================================
+
+    {
+        id: 'judge_call_witness_novelist',
+        speaker: '裁判長',
+        text: '次の証人を呼びます。離れに滞在していた西園寺先生、入廷を。',
+        character: 'judge',
+        next: 'novelist_enter'
+    },
+
+    {
+        id: 'novelist_enter',
+        speaker: '証人（作家）',
+        text: 'やれやれ……また私の執筆が中断されてしまうとは。西園寺です。',
+        character: 'novelist',
+        next: 'novelist_enter_2'
+    },
+
+    {
+        id: 'novelist_enter_2',
+        speaker: '証人（作家）',
+        text: '新作『密室の恋人』を書いていたところですよ。丁度佳境だったというのに。',
+        character: 'novelist',
+        next: 'novelist_testimony_1'
+    },
+
+    // --- 証言 ---
+    {
+        id: 'novelist_testimony_1',
+        speaker: '検察官',
+        text: '先生、昨夜離れでは何をしていたのですか？',
+        character: 'prosecutor',
+        next: 'novelist_testimony_2'
+    },
+
+    {
+        id: 'novelist_testimony_2',
+        speaker: '証人（作家）',
+        text: '執筆です。私は離れから一歩も出ていません。',
+        character: 'novelist',
+        next: 'novelist_testimony_2b'
+    },
+
+    {
+        id: 'novelist_testimony_2b',
+        speaker: '証人（作家）',
+        text: '外に出る理由がありません。筆一本あればどこへでも行けますからね。',
+        character: 'novelist',
+        next: 'novelist_testimony_3'
+    },
+
+    {
+        id: 'novelist_testimony_3',
+        speaker: '証人（作家）',
+        text: 'それに、私の部屋からは何も盗品が出なかった。つまり無関係です。',
+        character: 'novelist',
+        next: 'defense_cross_exam_novelist'
+    },
+
+    // ============================================================================
+    // 反対尋問：選択肢は普通に見えるが、どれかが「異議あり」ルートに繋がる
+    // ============================================================================
+    {
+        id: 'defense_cross_exam_novelist',
+        speaker: '弁護士（あなた）',
+        text: '（彼の証言には、必ずどこかに矛盾がある。その糸口を探すんだ）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '執筆内容について詳しく', next: 'ask_novel' },
+            { text: '部屋の様子について尋ねる', next: 'ask_room' },
+            { text: '甘い匂いについて追及する', next: 'ask_novelist_smell' },
+            { text: 'もっと詳しく聞く', next: 'novelist_generic_press' }
+        ]
+    },
+
+    // --- 普通の質問1 ---
+    {
+        id: 'ask_novel',
+        speaker: '弁護士（あなた）',
+        text: 'どんな小説を書いていたんですか？',
+        character: 'defense_attorney',
+        next: 'novelist_reply_novel'
+    },
+
+    {
+        id: 'novelist_reply_novel',
+        speaker: '証人（作家）',
+        text: 'ふん、凡人には理解し難いでしょうが……飴細工職人が密室で殺される話です。',
+        character: 'novelist',
+        next: 'defense_memo_candy'
+    },
+
+    {
+        id: 'defense_memo_candy',
+        speaker: '弁護士（あなた）',
+        text: '（飴細工……砂糖……焦げた匂い……気になるな）',
+        character: 'defense_attorney',
+        next: 'defense_cross_exam_novelist'
+    },
+
+    // --- 普通の質問2 ---
+    {
+        id: 'ask_room',
+        speaker: '弁護士（あなた）',
+        text: 'あなたの部屋に隠し場所はありませんでしたか？',
+        character: 'defense_attorney',
+        next: 'novelist_reply_room'
+    },
+
+    {
+        id: 'novelist_reply_room',
+        speaker: '証人（作家）',
+        text: 'ありませんよ。あるとすれば、制作途中の「オブジェ」くらいでしょう。',
+        character: 'novelist',
+        next: 'defense_cross_exam_novelist'
+    },
+
+    // --- 普通の質問3 ---
+    {
+        id: 'ask_novelist_smell',
+        speaker: '弁護士（あなた）',
+        text: '離れで甘い匂いはしませんでしたか？',
+        character: 'defense_attorney',
+        next: 'novelist_reply_smell'
+    },
+
+    {
+        id: 'novelist_reply_smell',
+        speaker: '証人（作家）',
+        text: '……私の高級コロンが甘い香りにも感じられるかもしれませんね。',
+        character: 'novelist',
+        next: 'defense_cross_exam_novelist'
+    },
+
+    // --- 普通に見えるが「異議あり」ルートへ繋がる選択肢 ---
+    {
+        id: 'novelist_generic_press',
+        speaker: '弁護士（あなた）',
+        text: 'もう少し詳しく話していただけますか？',
+        character: 'defense_attorney',
+        next: 'novelist_generic_press_2'
+    },
+
+    {
+        id: 'novelist_generic_press_2',
+        speaker: '証人（作家）',
+        text: '詳しく？ 構いませんが……どこを？',
+        character: 'novelist',
+        next: 'novelist_generic_press_3'
+    },
+
+    {
+        id: 'novelist_generic_press_3',
+        speaker: '弁護士（あなた）',
+        text: '（ここだ……この流れに持ち込めば矛盾を突く隙が生まれる）',
+        character: 'defense_attorney',
+        next: 'novelist_objection_route'
+    },
+
+    // --- ここで初めて異議ありが発動する（選択肢には書かれていない） ---
+    {
+        id: 'novelist_objection_route',
+        speaker: '弁護士（あなた）',
+        text: '待った！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'novelist_objection_reply'
+    },
+
+    {
+        id: 'novelist_objection_reply',
+        speaker: '証人（作家）',
+        text: 'ほう……？ 何に「待った」なのですか？',
+        character: 'novelist',
+        next: 'defense_press_novelist'
+    },
+
+    {
+        id: 'defense_press_novelist',
+        speaker: '弁護士（あなた）',
+        text: 'あなたの証言には、重大な矛盾があります！',
+        character: 'defense_attorney',
+        next: 'defense_press_novelist_choices'
+    },
+
+    // --- ここからは本来の追及フェーズへ繋がる ---
+    {
+        id: 'defense_press_novelist_choices',
+        speaker: '弁護士（あなた）',
+        text: '（この中に決定的なポイントがある……！）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '部屋の乱れを指摘する', next: 'press_room_mess' },
+            { text: '巨大なオブジェを追及する', next: 'press_candy_object' },
+            { text: '甘い匂いの矛盾を突く', next: 'press_novelist_smell' }
+        ]
+    },
+
+    // --- 以降は前の4部と互換性のある流れ（省略せず完全版として続く） ---
+    {
+        id: 'press_room_mess',
+        speaker: '弁護士（あなた）',
+        text: '捜査記録には、あなたの部屋に「砂糖片が散らばっていた」とあります！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'novelist_sweat_room'
+    },
+
+    {
+        id: 'novelist_sweat_room',
+        speaker: '証人（作家）',
+        text: 'なっ……創作活動の一環ですよ……！',
+        character: 'novelist',
+        next: 'defense_cross_exam_novelist'
+    },
+
+    {
+        id: 'press_candy_object',
+        speaker: '弁護士（あなた）',
+        text: 'あなたのオブジェ、あれ……本当に「飴」ではありませんか？',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'novelist_reply_object'
+    },
+
+    {
+        id: 'novelist_reply_object',
+        speaker: '証人（作家）',
+        text: 'な、なぜそれを……ゴホン、芸術です！',
+        character: 'novelist',
+        next: 'defense_cross_exam_novelist'
+    },
+
+    {
+        id: 'press_novelist_smell',
+        speaker: '弁護士（あなた）',
+        text: 'あなたの言った「コロンの匂い」……本当にそうでしたか？',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'novelist_reply_smell_corner'
+    },
+
+    {
+        id: 'novelist_reply_smell_corner',
+        speaker: '証人（作家）',
+        text: 'くっ……まぁ、似ていたのかもしれませんね……焦げた砂糖の匂いに……。',
+        character: 'novelist',
+        next: 'defense_logic_start'
+    }
+    // ============================================================================
+    // 第5章：クライマックス導入（ゲン追い詰めルート：隠し異議あり＋証拠提示統合）
+    // ============================================================================
+
+    {
+        id: 'defense_logic_start',
+        speaker: '弁護士（あなた）',
+        text: '（甘い匂い……金属音……砂糖……そしてレンの無実。すべて繋がり始めている）',
+        character: 'defense_attorney',
+        next: 'defense_logic_menu'
+    },
+
+    {
+        id: 'defense_logic_menu',
+        speaker: '弁護士（あなた）',
+        text: '（事件を動かしていたのは、まさにこの点だ……どこから切り崩す？）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '砂糖壺の“空”について整理する', next: 'logic_sugar_empty' },
+            { text: '金属音の正体を考える', next: 'logic_metal_sound' },
+            { text: '甘い匂いの出所を深掘りする', next: 'logic_smell_source' },
+            { text: '証言の流れをもう一度整理する', next: 'logic_general_think' }
+        ]
+    },
+
+    // ============================================================================
+    // 各ロジックの思考フェーズ（プレイヤーの理解を深めるだけで進行はしない）
+    // ============================================================================
+
+    {
+        id: 'logic_sugar_empty',
+        speaker: '弁護士（あなた）',
+        text: '（砂糖壺……あれは事件当夜に“空”だった。使ったのは誰だ？）',
+        character: 'defense_attorney',
+        next: 'logic_sugar_empty_2'
+    },
+    {
+        id: 'logic_sugar_empty_2',
+        speaker: '弁護士（あなた）',
+        text: '（ブリ大根には大量の砂糖は使わない。では何に使った？）',
+        character: 'defense_attorney',
+        next: 'defense_logic_menu'
+    },
+
+    {
+        id: 'logic_metal_sound',
+        speaker: '弁護士（あなた）',
+        text: '（レンが聞いた“カチン、カチン”……鍋同士が当たるような音だ）',
+        character: 'defense_attorney',
+        next: 'logic_metal_sound_2'
+    },
+    {
+        id: 'logic_metal_sound_2',
+        speaker: '弁護士（あなた）',
+        text: '（砂糖を煮詰めていたなら納得がいく……！）',
+        character: 'defense_attorney',
+        next: 'defense_logic_menu'
+    },
+
+    {
+        id: 'logic_smell_source',
+        speaker: '弁護士（あなた）',
+        text: '（“甘い焦げた匂い”……砂糖を焦がした匂いだ）',
+        character: 'defense_attorney',
+        next: 'logic_smell_source_2'
+    },
+    {
+        id: 'logic_smell_source_2',
+        speaker: '弁護士（あなた）',
+        text: '（しかもその匂いは、蔵→廊下→離れへと流れていた……）',
+        character: 'defense_attorney',
+        next: 'defense_logic_menu'
+    },
+
+    {
+        id: 'logic_general_think',
+        speaker: '弁護士（あなた）',
+        text: '（全員の証言がどこかで繋がるはず……）',
+        character: 'defense_attorney',
+        next: 'logic_general_think_2'
+    },
+    {
+        id: 'logic_general_think_2',
+        speaker: '弁護士（あなた）',
+        text: '（迷う必要はない……次で決める）',
+        character: 'defense_attorney',
+        next: 'defense_final_logic_choice'
+    },
+
+    // ============================================================================
+    // 真相へ進む隠しルート（異議ありはここから）
+    // ============================================================================
+    {
+        id: 'defense_final_logic_choice',
+        speaker: '弁護士（あなた）',
+        text: '（ここから一気に畳み掛ける……どこを突けば全てが崩れる？）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '「砂糖」を扱える人物に着目する', next: 'route_sugar_focus' },
+            { text: '「匂い」の移動に注目する', next: 'route_smell_focus' },
+            { text: '「金属音」の正体を突く', next: 'route_metal_focus' },
+            { text: '証拠品を確認する', next: 'route_check_evidence' }
+        ]
+    },
+
+    // --- 砂糖ルート（隠し異議あり発動） ---
+    {
+        id: 'route_sugar_focus',
+        speaker: '弁護士（あなた）',
+        text: '（砂糖を最も扱う職種……それは調理担当の人物……！）',
+        character: 'defense_attorney',
+        next: 'route_sugar_focus_2'
+    },
+
+    {
+        id: 'route_sugar_focus_2',
+        speaker: '弁護士（あなた）',
+        text: '待った！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'route_sugar_focus_3'
+    },
+
+    {
+        id: 'route_sugar_focus_3',
+        speaker: '弁護士（あなた）',
+        text: '砂糖を多量に扱い、火を使い、鍋も自由に動かせる人物……それは一人しかいない……！',
+        character: 'defense_attorney',
+        next: 'route_conclusion_lead'
+    },
+
+    // --- 匂いルート（これも異議あり） ---
+    {
+        id: 'route_smell_focus',
+        speaker: '弁護士（あなた）',
+        text: '（匂いの移動……これは犯人が館内を“何かを持って移動した”証拠だ）',
+        character: 'defense_attorney',
+        next: 'route_smell_focus_2'
+    },
+
+    {
+        id: 'route_smell_focus_2',
+        speaker: '弁護士（あなた）',
+        text: '……そこだ！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'route_smell_focus_3'
+    },
+
+    {
+        id: 'route_smell_focus_3',
+        speaker: '弁護士（あなた）',
+        text: '匂いは「砂糖を煮詰めた鍋」ごと移動したもの……その鍋を持ち歩いたのは誰だ！？',
+        character: 'defense_attorney',
+        next: 'route_conclusion_lead'
+    },
+
+    // --- 金属音ルート（異議あり発動） ---
+    {
+        id: 'route_metal_focus',
+        speaker: '弁護士（あなた）',
+        text: '（金属音……蔵から聞こえたという不可解な音）',
+        character: 'defense_attorney',
+        next: 'route_metal_focus_2'
+    },
+
+    {
+        id: 'route_metal_focus_2',
+        speaker: '弁護士（あなた）',
+        text: '異議あり！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'route_metal_focus_3'
+    },
+
+    {
+        id: 'route_metal_focus_3',
+        speaker: '弁護士（あなた）',
+        text: '金属音は砂糖を煮詰める鍋が台座に触れた音……！ つまり犯人は“鍋を持って蔵に入った”！',
+        character: 'defense_attorney',
+        next: 'route_conclusion_lead'
+    },
+
+    // --- 証拠ルート（いずれも異議ありに変換される） ---
+    {
+        id: 'route_check_evidence',
+        speaker: '弁護士（あなた）',
+        text: '（証拠をもう一度確認する……何が犯人へ繋がる？）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '空の砂糖壺を見る', next: 'evidence_sugarpot_press' },
+            { text: '壊れた鈴を見る', next: 'evidence_bell_press' },
+            { text: '調理手順書を見る', next: 'evidence_manual_press' },
+            { text: '巨大な飴オブジェを見る', next: 'evidence_candy_press' }
+        ]
+    },
+
+    {
+        id: 'evidence_sugarpot_press',
+        speaker: '弁護士（あなた）',
+        text: '（砂糖壺は事件直前に空になった……！）',
+        character: 'defense_attorney',
+        next: 'route_sugar_focus_2' // 異議ありに接続
+    },
+
+    {
+        id: 'evidence_bell_press',
+        speaker: '弁護士（あなた）',
+        text: '（鈴は細工され、音が鳴らなくされていた……！）',
+        character: 'defense_attorney',
+        next: 'route_metal_focus_2' // 異議ありに接続
+    },
+
+    {
+        id: 'evidence_manual_press',
+        speaker: '弁護士（あなた）',
+        text: '（“火の番”時間は本来……火を止めている時間帯だった）',
+        character: 'defense_attorney',
+        next: 'route_smell_focus_2' // 異議ありに接続
+    },
+
+    {
+        id: 'evidence_candy_press',
+        speaker: '弁護士（あなた）',
+        text: '（巨大な飴……砂糖を大量に使う細工物……）',
+        character: 'defense_attorney',
+        next: 'route_sugar_focus_2'
+    },
+
+    // ============================================================================
+    // 犯人への断定導入
+    // ============================================================================
+    {
+        id: 'route_conclusion_lead',
+        speaker: '弁護士（あなた）',
+        text: '犯人は……砂糖を扱い、鍋を使い、火を使い、匂いを引きずり、鈴を細工できる人物……',
+        character: 'defense_attorney',
+        next: 'route_conclusion_lead_2'
+    },
+
+    {
+        id: 'route_conclusion_lead_2',
+        speaker: '弁護士（あなた）',
+        text: '――板前のゲンさん、あなたしかいない！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'gen_reaction_shock_1'
+    },
+
+    // --- ゲン反応 ---
+    {
+        id: 'gen_reaction_shock_1',
+        speaker: '証人（板前）',
+        text: 'な、なんだと！？ バカ言うな！ あっしが犯人なわけねぇだろ！！',
+        character: 'chef',
+        next: 'gen_reaction_shock_2'
+    },
+
+    {
+        id: 'gen_reaction_shock_2',
+        speaker: '証人（板前）',
+        text: '砂糖を煮詰める？ 鍋を持って歩く？ ふざけんな！！',
+        character: 'chef',
+        next: 'defense_present_gen_evidence_menu'
+    },
+
+    // ============================================================================
+    // ゲンを追い詰める証拠提示（通常＋隠し異議あり）
+    // ============================================================================
+
+    {
+        id: 'defense_present_gen_evidence_menu',
+        speaker: '弁護士（あなた）',
+        text: 'ゲンさん、あなたの証言には重大な矛盾がある。ここで整理しよう。',
+        character: 'defense_attorney',
+        choices: [
+            { text: '空の砂糖壺を突きつける', next: 'present_sugarpot' },
+            { text: '壊れた鈴を突きつける', next: 'present_bell' },
+            { text: '調理手順書を提示する', next: 'present_manual' },
+            { text: '別角度から追及する', next: 'present_alt_route' }
+        ]
+    },
+
+    // --- 証拠提示：砂糖壺 ---
+    {
+        id: 'present_sugarpot',
+        speaker: '弁護士（あなた）',
+        text: 'この砂糖壺……昨夜は空でしたね？',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'present_sugarpot_reply'
+    },
+
+    {
+        id: 'present_sugarpot_reply',
+        speaker: '証人（板前）',
+        text: 'し、知らねぇよ！！ 誰かが勝手に使ったんだ！！',
+        character: 'chef',
+        next: 'defense_present_gen_evidence_menu'
+    },
+
+    // --- 証拠提示：壊れた鈴 ---
+    {
+        id: 'present_bell',
+        speaker: '弁護士（あなた）',
+        text: '勝手口の鈴は“鳴らないように細工”されていました。この説明は？',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'present_bell_reply'
+    },
+
+    {
+        id: 'present_bell_reply',
+        speaker: '証人（板前）',
+        text: 'イタズラだろ！！ あっしのせいじゃねぇ！！',
+        character: 'chef',
+        next: 'defense_present_gen_evidence_menu'
+    },
+
+    // --- 証拠提示：調理手順書 ---
+    {
+        id: 'present_manual',
+        speaker: '弁護士（あなた）',
+        text: '“火の番をしていた”と言いましたね？ しかし手順書には――',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'present_manual_reply'
+    },
+
+    {
+        id: 'present_manual_reply',
+        speaker: '証人（板前）',
+        text: 'み、ミスだよ！ 記憶違いだ！',
+        character: 'chef',
+        next: 'defense_present_gen_evidence_menu'
+    },
+
+    // --- 別角度から追及（ここが隠し異議あり） ---
+    {
+        id: 'present_alt_route',
+        speaker: '弁護士（あなた）',
+        text: '……ゲンさん。あなたの証言、ある一点だけ決定的におかしい。',
+        character: 'defense_attorney',
+        next: 'present_alt_route_2'
+    },
+
+    {
+        id: 'present_alt_route_2',
+        speaker: '弁護士（あなた）',
+        text: '待った！！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'present_alt_route_3'
+    },
+
+    {
+        id: 'present_alt_route_3',
+        speaker: '弁護士（あなた）',
+        text: '“火の番のために厨房を離れなかった”？ 本当に？',
+        character: 'defense_attorney',
+        next: 'present_alt_route_4'
+    },
+
+    {
+        id: 'present_alt_route_4',
+        speaker: '弁護士（あなた）',
+        text: '手順書の時間帯では火は止めている……つまりあなたの説明は嘘だ！',
+        character: 'defense_attorney',
+        next: 'gen_break_1'
+    },
+
+    // ============================================================================
+    // ゲンの動揺フェーズ（次の部で完全崩壊させる）
+    // ============================================================================
+    {
+        id: 'gen_break_1',
+        speaker: '証人（板前）',
+        text: 'ぐっ……！ な、なんでそんな細けぇこと覚えてんだよ……！',
+        character: 'chef',
+        next: 'gen_break_2'
+    },
+
+    {
+        id: 'gen_break_2',
+        speaker: '証人（板前）',
+        text: 'あ、あっしは……ちょっと……厨房を離れただけだよ……！',
+        character: 'chef',
+        next: 'gen_break_3'
+    },
+
+    {
+        id: 'gen_break_3',
+        speaker: '弁護士（あなた）',
+        text: 'その“5分”こそ、犯行時間だ！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'judge_call_next_phase'
+    },
+
+    {
+        id: 'judge_call_next_phase',
+        speaker: '裁判長',
+        text: '……弁護人。続けなさい。この先に真相があるのですね？',
+        character: 'judge',
+        next: 'defense_prepare_final'
+    },
+
+    {
+        id: 'defense_prepare_final',
+        speaker: '弁護士（あなた）',
+        text: '（ここから一気に畳みかける……ゲンを追い詰める最終章へ行く）',
+        character: 'defense_attorney',
+        next: null // → 次の「第6部」につなぐ
+    }
+    // ============================================================================
+    // 第6章：真犯人ゲンを追い詰める（前半：矛盾崩壊）
+    // ============================================================================
+
+    {
+        id: 'defense_prepare_final',
+        speaker: '弁護士（あなた）',
+        text: '（ゲンさん……あなたの証言は、すでに崩れ始めている）',
+        character: 'defense_attorney',
+        next: 'judge_signal_continue'
+    },
+
+    {
+        id: 'judge_signal_continue',
+        speaker: '裁判長',
+        text: '弁護人、引き続き尋問を続けてください。',
+        character: 'judge',
+        next: 'defense_gen_main_attack'
+    },
+
+    {
+        id: 'defense_gen_main_attack',
+        speaker: '弁護士（あなた）',
+        text: 'ゲンさん……あらためて確認します。',
+        character: 'defense_attorney',
+        next: 'defense_gen_main_attack_2'
+    },
+
+    {
+        id: 'defense_gen_main_attack_2',
+        speaker: '弁護士（あなた）',
+        text: 'あなたは「厨房を一歩も出ていない」と証言しましたね？',
+        character: 'defense_attorney',
+        next: 'gen_panic_1'
+    },
+
+    {
+        id: 'gen_panic_1',
+        speaker: '証人（板前）',
+        text: 'そ、そうだよ……ちょっとタバコ休憩に行っただけで……！',
+        character: 'chef',
+        next: 'defense_gen_pinch_1'
+    },
+
+    {
+        id: 'defense_gen_pinch_1',
+        speaker: '弁護士（あなた）',
+        text: 'その「5分間」こそ、事件の中でもっとも重要な“空白時間”なのです！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'defense_gen_pinch_menu'
+    },
+
+    // ============================================================================
+    // プレイヤーが矛盾点を突くフェーズ
+    // ============================================================================
+    {
+        id: 'defense_gen_pinch_menu',
+        speaker: '弁護士（あなた）',
+        text: '（ここで正しいポイントを突けば、ゲンの嘘は完全に崩れる……）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '砂糖壺の異常', next: 'pinch_sugar' },
+            { text: '勝手口の鈴の細工', next: 'pinch_bell' },
+            { text: '火の番の矛盾', next: 'pinch_fire' },
+            { text: '音と匂いの移動', next: 'pinch_smell_sound' }
+        ]
+    },
+
+    // --- 砂糖 ---
+    {
+        id: 'pinch_sugar',
+        speaker: '弁護士（あなた）',
+        text: '事件後、砂糖壺は空でしたね？',
+        character: 'defense_attorney',
+        next: 'pinch_sugar_2'
+    },
+
+    {
+        id: 'pinch_sugar_2',
+        speaker: '弁護士（あなた）',
+        text: 'つまり、誰かが大量の砂糖を“使った”のです。',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'pinch_sugar_3'
+    },
+
+    {
+        id: 'pinch_sugar_3',
+        speaker: '証人（板前）',
+        text: 'う、うるせぇな……砂糖くらい誰でも使えるだろ……！',
+        character: 'chef',
+        next: 'defense_gen_pinch_menu'
+    },
+
+    // --- 鈴 ---
+    {
+        id: 'pinch_bell',
+        speaker: '弁護士（あなた）',
+        text: '勝手口の鈴は「鳴らないように細工」されていました。',
+        character: 'defense_attorney',
+        next: 'pinch_bell_2'
+    },
+
+    {
+        id: 'pinch_bell_2',
+        speaker: '弁護士（あなた）',
+        text: '厨房を出入りしても音が鳴らないように……ね？',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'pinch_bell_3'
+    },
+
+    {
+        id: 'pinch_bell_3',
+        speaker: '証人（板前）',
+        text: 'し、知らねーよ！！ イタズラだろ！！',
+        character: 'chef',
+        next: 'defense_gen_pinch_menu'
+    },
+
+    // --- 火の番 ---
+    {
+        id: 'pinch_fire',
+        speaker: '弁護士（あなた）',
+        text: '手順書によると、ブリ大根は「10時には火を止めて冷ます」段階のはずでした。',
+        character: 'defense_attorney',
+        next: 'pinch_fire_2'
+    },
+
+    {
+        id: 'pinch_fire_2',
+        speaker: '弁護士（あなた）',
+        text: '“火の番”なんて存在しない時間帯だったのです！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'pinch_fire_3'
+    },
+
+    {
+        id: 'pinch_fire_3',
+        speaker: '証人（板前）',
+        text: 'う、うぐ……！ そ、それはだな……！',
+        character: 'chef',
+        next: 'defense_gen_pinch_menu'
+    },
+
+    // --- 音と匂い ---
+    {
+        id: 'pinch_smell_sound',
+        speaker: '弁護士（あなた）',
+        text: '金属音と甘い匂い……あれは砂糖を煮詰めた時のものです。',
+        character: 'defense_attorney',
+        next: 'pinch_smell_sound_2'
+    },
+
+    {
+        id: 'pinch_smell_sound_2',
+        speaker: '弁護士（あなた）',
+        text: '鍋を持って館内を移動した人物……一体誰ですか？',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'pinch_smell_sound_3'
+    },
+
+    {
+        id: 'pinch_smell_sound_3',
+        speaker: '証人（板前）',
+        text: 'な、鍋なんか持ってねぇ！！',
+        character: 'chef',
+        next: 'defense_gen_pinch_menu'
+    },
+
+    // ============================================================================
+    // 裁判長がストップをかけ、強制的に核心へ移行
+    // ============================================================================
+    {
+        id: 'judge_cut_in',
+        speaker: '裁判長',
+        text: '……弁護人、そろそろ核心を示してください。',
+        character: 'judge',
+        next: 'defense_gen_core'
+    },
+
+    {
+        id: 'defense_gen_core',
+        speaker: '弁護士（あなた）',
+        text: 'もちろんです。ここが事件の核心です。',
+        character: 'defense_attorney',
+        next: 'defense_gen_core_2'
+    },
+
+    {
+        id: 'defense_gen_core_2',
+        speaker: '弁護士（あなた）',
+        text: 'ゲンさん……あなたは「砂糖を溶かしていた」。そうでしょう？',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'gen_super_panic_1'
+    },
+
+    {
+        id: 'gen_super_panic_1',
+        speaker: '証人（板前）',
+        text: 'な、な、何を根拠にそんなデタラメを……！',
+        character: 'chef',
+        next: 'defense_gen_core_menu'
+    },
+
+    // ============================================================================
+    // 決定的証拠の提示フェーズ
+    // ============================================================================
+    {
+        id: 'defense_gen_core_menu',
+        speaker: '弁護士（あなた）',
+        text: '（ここで決定的な証拠を提示すれば、ゲンは逃げられない……）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '空の砂糖壺を提出する', next: 'core_present_sugarpot' },
+            { text: '勝手口の壊れた鈴を提出する', next: 'core_present_bell' },
+            { text: '調理手順書を提出する', next: 'core_present_manual' },
+            { text: '巨大なベッコウ飴を提出する', next: 'core_present_candy' },
+            { text: '証拠ではなく論理で詰める', next: 'core_logic_press' }
+        ]
+    },
+
+    // --- 砂糖壺 ---
+    {
+        id: 'core_present_sugarpot',
+        speaker: '弁護士（あなた）',
+        text: 'この空の砂糖壺……あなたが砂糖を全部煮詰めた証拠です！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'core_present_sugarpot_reply'
+    },
+
+    {
+        id: 'core_present_sugarpot_reply',
+        speaker: '証人（板前）',
+        text: 'う、ぐ……！ だ、だから知らねぇって言ってんだろ！！',
+        character: 'chef',
+        next: 'defense_gen_core_menu'
+    },
+
+    // --- 壊れた鈴 ---
+    {
+        id: 'core_present_bell',
+        speaker: '弁護士（あなた）',
+        text: '勝手口の鈴が鳴らないように細工されていましたね？',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'core_present_bell_reply'
+    },
+
+    {
+        id: 'core_present_bell_reply',
+        speaker: '証人（板前）',
+        text: 'し、知らねぇよ！！ なんであっしがそんなこと！！',
+        character: 'chef',
+        next: 'defense_gen_core_menu'
+    },
+
+    // --- 調理手順書 ---
+    {
+        id: 'core_present_manual',
+        speaker: '弁護士（あなた）',
+        text: '手順書には10時の時点では火を使わないとある。その時間、あなたは火を使っていた。',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'core_present_manual_reply'
+    },
+
+    {
+        id: 'core_present_manual_reply',
+        speaker: '証人（板前）',
+        text: 'み、ミスだよ！！ 誰だって間違いはあるだろ！！！！',
+        character: 'chef',
+        next: 'defense_gen_core_menu'
+    },
+
+    // --- ベッコウ飴：ここが本質（異議あり発動） ---
+    {
+        id: 'core_present_candy',
+        speaker: '弁護士（あなた）',
+        text: 'そしてこれが……あなたが“砂糖を大量に使った”決定的証拠です。',
+        character: 'defense_attorney',
+        next: 'core_present_candy_2'
+    },
+
+    {
+        id: 'core_present_candy_2',
+        speaker: '弁護士（あなた）',
+        text: '異議あり！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'core_present_candy_3'
+    },
+
+    {
+        id: 'core_present_candy_3',
+        speaker: '弁護士（あなた）',
+        text: '“巨大な飴の塊”……あれはあなたが砂糖を溶かし続けて作った物だ！',
+        character: 'defense_attorney',
+        next: 'core_present_candy_4'
+    },
+
+    {
+        id: 'core_present_candy_4',
+        speaker: '証人（板前）',
+        text: 'ちょ、ちょっと待て！！ なんでそれをあっしが作ったみたいに！！',
+        character: 'chef',
+        next: 'defense_pre_final_phase'
+    },
+
+    // --- 論理で詰めるルート（こちらも異議ありへ繋げる） ---
+    {
+        id: 'core_logic_press',
+        speaker: '弁護士（あなた）',
+        text: 'ゲンさん……あなたの嘘はもう隠せません。',
+        character: 'defense_attorney',
+        next: 'core_logic_press_2'
+    },
+
+    {
+        id: 'core_logic_press_2',
+        speaker: '弁護士（あなた）',
+        text: '待った！！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'core_logic_press_3'
+    },
+
+    {
+        id: 'core_logic_press_3',
+        speaker: '弁護士（あなた）',
+        text: '砂糖、鍋、匂い、音、鈴の細工……全部あなたにしかできない！',
+        character: 'defense_attorney',
+        next: 'defense_pre_final_phase'
+    },
+
+    // ============================================================================
+    // ゲンの反撃 → 崩壊パートへ続く（次は7部）
+    // ============================================================================
+    {
+        id: 'defense_pre_final_phase',
+        speaker: '証人（板前）',
+        text: 'う、うあああ……！ だ、だから……違うって言ってんだろ！！',
+        character: 'chef',
+        next: 'defense_pre_final_phase_2'
+    },
+
+    {
+        id: 'defense_pre_final_phase_2',
+        speaker: '証人（板前）',
+        text: 'あっしは……あっしは……！',
+        character: 'chef',
+        next: 'judge_final_signal'
+    },
+
+    {
+        id: 'judge_final_signal',
+        speaker: '裁判長',
+        text: '弁護人。どうやら次が最後になりそうですね。',
+        character: 'judge',
+        next: 'defense_pre_final'
+    },
+
+    {
+        id: 'defense_pre_final',
+        speaker: '弁護士（あなた）',
+        text: '（ここからが決着だ……！ ゲンにトドメを刺す“真相パート”へ進む）',
+        character: 'defense_attorney',
+        next: null  // → 第7部へ
+    }
+    // ============================================================================
+    // 第7章：真相解明（ゲンを完全論破するフェーズ）
+    // ============================================================================
+
+    {
+        id: 'defense_pre_final',
+        speaker: '弁護士（あなた）',
+        text: '（ここからは真相へ一直線……ゲンさん、覚悟してください）',
+        character: 'defense_attorney',
+        next: 'judge_begin_truth'
+    },
+
+    {
+        id: 'judge_begin_truth',
+        speaker: '裁判長',
+        text: '弁護人、真相を明らかにする準備はできていますね？',
+        character: 'judge',
+        next: 'defense_truth_intro'
+    },
+
+    {
+        id: 'defense_truth_intro',
+        speaker: '弁護士（あなた）',
+        text: 'もちろんです。ここから先は……全てを明らかにします。',
+        character: 'defense_attorney',
+        next: 'defense_truth_intro_2'
+    },
+
+    {
+        id: 'defense_truth_intro_2',
+        speaker: '弁護士（あなた）',
+        text: 'ゲンさん。あなたは “砂糖を溶かし、大量の飴を作っていた” ——違いますか？',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'gen_defensive_wall_1'
+    },
+
+    // ============================================================================
+    // ゲンの必死の抵抗
+    // ============================================================================
+
+    {
+        id: 'gen_defensive_wall_1',
+        speaker: '証人（板前）',
+        text: 'ち、違ぇよ！！ あっしが飴職人だってのか！？ 馬鹿言ってんじゃねぇ！',
+        character: 'chef',
+        next: 'gen_defensive_wall_2'
+    },
+
+    {
+        id: 'gen_defensive_wall_2',
+        speaker: '証人（板前）',
+        text: '砂糖なんて使っちゃいねぇ！ 鍋なんて振ってねぇ！ 匂いも知らねぇ！！',
+        character: 'chef',
+        next: 'defense_truth_menu'
+    },
+
+    // ============================================================================
+    // プレイヤーが真相の組み立てを選ぶフェーズ（異議ありルート多数）
+    // ============================================================================
+
+    {
+        id: 'defense_truth_menu',
+        speaker: '弁護士（あなた）',
+        text: '（ここからは “どこを突いても核心に繋がる”。最終論破だ……！）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '砂糖壺 → 飴の材料', next: 'truth_sugar_connection' },
+            { text: '金属音 → 鍋との関連', next: 'truth_metal_connection' },
+            { text: '甘い匂い → 加熱痕跡', next: 'truth_smell_connection' },
+            { text: '手順書 → 炎の矛盾', next: 'truth_fire_connection' },
+            { text: '巨大飴 → 中身の推理', next: 'truth_candy_core' }
+        ]
+    },
+
+    // ============================================================================
+    // ① 砂糖壺ルート（異議ありあり）
+    // ============================================================================
+    {
+        id: 'truth_sugar_connection',
+        speaker: '弁護士（あなた）',
+        text: '“砂糖壺が空”だった点……これこそ核心です。',
+        character: 'defense_attorney',
+        next: 'truth_sugar_connection_2'
+    },
+
+    {
+        id: 'truth_sugar_connection_2',
+        speaker: '弁護士（あなた）',
+        text: '異議あり！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'truth_sugar_connection_3'
+    },
+
+    {
+        id: 'truth_sugar_connection_3',
+        speaker: '弁護士（あなた）',
+        text: '料理では使わないほどの砂糖を“誰がどこで使ったか”。答えは一つです。',
+        character: 'defense_attorney',
+        next: 'truth_sugar_connection_4'
+    },
+
+    {
+        id: 'truth_sugar_connection_4',
+        speaker: '証人（板前）',
+        text: 'し、知らねぇって言ってんだろ……！',
+        character: 'chef',
+        next: 'defense_truth_menu'
+    },
+
+    // ============================================================================
+    // ② 金属音ルート
+    // ============================================================================
+    {
+        id: 'truth_metal_connection',
+        speaker: '弁護士（あなた）',
+        text: '“カチン、カチン”という金属音は何だったのか。',
+        character: 'defense_attorney',
+        next: 'truth_metal_connection_2'
+    },
+
+    {
+        id: 'truth_metal_connection_2',
+        speaker: '弁護士（あなた）',
+        text: '待った！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'truth_metal_connection_3'
+    },
+
+    {
+        id: 'truth_metal_connection_3',
+        speaker: '弁護士（あなた）',
+        text: 'これは “鍋の底が蔵の台座に当たった音” です！',
+        character: 'defense_attorney',
+        next: 'truth_metal_connection_4'
+    },
+
+    {
+        id: 'truth_metal_connection_4',
+        speaker: '証人（板前）',
+        text: 'あっしは鍋なんて持ってねぇ！ ……持ってねぇんだよ！！',
+        character: 'chef',
+        next: 'defense_truth_menu'
+    },
+
+    // ============================================================================
+    // ③ 匂いルート
+    // ============================================================================
+    {
+        id: 'truth_smell_connection',
+        speaker: '弁護士（あなた）',
+        text: '“焦げた甘い匂い” は砂糖を煮詰めた匂いです。',
+        character: 'defense_attorney',
+        next: 'truth_smell_connection_2'
+    },
+
+    {
+        id: 'truth_smell_connection_2',
+        speaker: '弁護士（あなた）',
+        text: '異議あり！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'truth_smell_connection_3'
+    },
+
+    {
+        id: 'truth_smell_connection_3',
+        speaker: '弁護士（あなた）',
+        text: 'しかも匂いは “館内を移動” しています。何かを持って動いた証拠です。',
+        character: 'defense_attorney',
+        next: 'truth_smell_connection_4'
+    },
+
+    {
+        id: 'truth_smell_connection_4',
+        speaker: '証人（板前）',
+        text: 'に、匂いなんて知らねぇよ……！',
+        character: 'chef',
+        next: 'defense_truth_menu'
+    },
+
+    // ============================================================================
+    // ④ 手順書ルート
+    // ============================================================================
+    {
+        id: 'truth_fire_connection',
+        speaker: '弁護士（あなた）',
+        text: '10時には火を止める——それが調理手順書です。',
+        character: 'defense_attorney',
+        next: 'truth_fire_connection_2'
+    },
+
+    {
+        id: 'truth_fire_connection_2',
+        speaker: '弁護士（あなた）',
+        text: '待った！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'truth_fire_connection_3'
+    },
+
+    {
+        id: 'truth_fire_connection_3',
+        speaker: '弁護士（あなた）',
+        text: 'つまり “火の番で厨房にいた” という証言は嘘です！',
+        character: 'defense_attorney',
+        next: 'truth_fire_connection_4'
+    },
+
+    {
+        id: 'truth_fire_connection_4',
+        speaker: '証人（板前）',
+        text: 'ぐっ……あ、いや……その……！',
+        character: 'chef',
+        next: 'defense_truth_menu'
+    },
+
+    // ============================================================================
+    // ⑤ 巨大飴コア（真相の半分を暴く）
+    // ============================================================================
+
+    {
+        id: 'truth_candy_core',
+        speaker: '弁護士（あなた）',
+        text: 'そして最後に……“巨大な飴細工”。',
+        character: 'defense_attorney',
+        next: 'truth_candy_core_2'
+    },
+
+    {
+        id: 'truth_candy_core_2',
+        speaker: '弁護士（あなた）',
+        text: '異議あり！！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'truth_candy_core_3'
+    },
+
+    {
+        id: 'truth_candy_core_3',
+        speaker: '弁護士（あなた）',
+        text: 'あれはただの飴ではない。“中に何かが入っている”。',
+        character: 'defense_attorney',
+        next: 'truth_candy_core_4'
+    },
+
+    {
+        id: 'truth_candy_core_4',
+        speaker: '証人（板前）',
+        text: 'や、やめろ……！ あれはオブジェだ！ 芸術だ！！',
+        character: 'chef',
+        next: 'truth_candy_core_5'
+    },
+
+    {
+        id: 'truth_candy_core_5',
+        speaker: '弁護士（あなた）',
+        text: '“異常に重たい” という証言もあります。',
+        character: 'defense_attorney',
+        next: 'truth_candy_core_6'
+    },
+
+    {
+        id: 'truth_candy_core_6',
+        speaker: '弁護士（あなた）',
+        text: '——そう、中身は“金属製の何か”なのです。',
+        character: 'defense_attorney',
+        next: 'truth_candy_core_7'
+    },
+
+    {
+        id: 'truth_candy_core_7',
+        speaker: '証人（板前）',
+        text: 'ちょ、ちょっと待て！！ そ、それ以上は……！',
+        character: 'chef',
+        next: 'truth_candy_core_8'
+    },
+
+    {
+        id: 'truth_candy_core_8',
+        speaker: '弁護士（あなた）',
+        text: 'あなたは盗んだ招き猫に “飴をかけてコーティング” し、別物に見せかけた！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'gen_total_break_1'
+    },
+
+    // ============================================================================
+    // ゲンの精神崩壊寸前フェーズ
+    // ============================================================================
+    {
+        id: 'gen_total_break_1',
+        speaker: '証人（板前）',
+        text: 'や、やめろォォォ！！',
+        character: 'chef',
+        next: 'gen_total_break_2'
+    },
+
+    {
+        id: 'gen_total_break_2',
+        speaker: '証人（板前）',
+        text: 'あっしは……あっしはただ……！',
+        character: 'chef',
+        next: 'judge_truth_climax'
+    },
+
+    {
+        id: 'judge_truth_climax',
+        speaker: '裁判長',
+        text: '弁護人、あなたの推理は“説得力を持ち始めています”。続けなさい。',
+        character: 'judge',
+        next: 'defense_truth_push_final'
+    },
+
+    {
+        id: 'defense_truth_push_final',
+        speaker: '弁護士（あなた）',
+        text: '（ゲンはもう限界……あとはトドメさえ刺せば、真相は完全に暴かれる）',
+        character: 'defense_attorney',
+        next: null  // → 次の「第8部（完全自白編）」へ
+    }
+    // ============================================================================
+    // 第8章：ゲン自白編（完全崩壊・涙の真相告白）
+    // ============================================================================
+
+    {
+        id: 'defense_truth_push_final',
+        speaker: '弁護士（あなた）',
+        text: '（ゲンさん……あなたはもう逃げられない。最後のピースをはめる……）',
+        character: 'defense_attorney',
+        next: 'defense_truth_push_final_2'
+    },
+
+    {
+        id: 'defense_truth_push_final_2',
+        speaker: '弁護士（あなた）',
+        text: 'ゲンさん。あなたが“飴で招き猫を覆った”のは、証拠と矛盾しません。',
+        character: 'defense_attorney',
+        next: 'defense_truth_push_final_3'
+    },
+
+    {
+        id: 'defense_truth_push_final_3',
+        speaker: '弁護士（あなた）',
+        text: 'あとは……あなたが“飴をどこで作ったか”を示すだけです。',
+        character: 'defense_attorney',
+        next: 'judge_call_last_argument'
+    },
+
+    // ----------------------------------------------------------------------------
+    // 裁判長が最後の追及を許可する
+    // ----------------------------------------------------------------------------
+
+    {
+        id: 'judge_call_last_argument',
+        speaker: '裁判長',
+        text: '弁護人、最後の追及を許可します。犯人が調理した場所……その証拠を示しなさい。',
+        character: 'judge',
+        next: 'defense_last_argument_menu'
+    },
+
+    // ============================================================================
+    // 最終追及フェーズ：選択肢に見えるが、どれかが“異議あり”
+    // ============================================================================
+
+    {
+        id: 'defense_last_argument_menu',
+        speaker: '弁護士（あなた）',
+        text: '（ゲンを追い詰める最後のピース……どこだ？）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '厨房に残った焦げ跡を指摘', next: 'last_arg_kitchen_mark' },
+            { text: '勝手口の鈴の細工', next: 'last_arg_broken_bell' },
+            { text: '砂糖壺の位置関係を追及', next: 'last_arg_sugar_position' },
+            { text: '調理手順書の温度記述', next: 'last_arg_fire_temp' },
+            { text: '“ある証拠品”を突きつける', next: 'last_arg_evidence_select' }
+        ]
+    },
+
+    // ============================================================================
+    // ① 焦げ跡（異議あり）
+    // ============================================================================
+    {
+        id: 'last_arg_kitchen_mark',
+        speaker: '弁護士（あなた）',
+        text: '厨房の壁に残った“焦げ跡”。あれこそ……',
+        character: 'defense_attorney',
+        next: 'last_arg_kitchen_mark_2'
+    },
+
+    {
+        id: 'last_arg_kitchen_mark_2',
+        speaker: '弁護士（あなた）',
+        text: '異議あり！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'last_arg_kitchen_mark_3'
+    },
+
+    {
+        id: 'last_arg_kitchen_mark_3',
+        speaker: '弁護士（あなた）',
+        text: '砂糖を高温で煮詰めた時の跳ね汚れ……まさに飴作りの痕跡です！',
+        character: 'defense_attorney',
+        next: 'gen_break_1'
+    },
+
+    // ============================================================================
+    // ② 壊れた鈴（異議あり）
+    // ============================================================================
+    {
+        id: 'last_arg_broken_bell',
+        speaker: '弁護士（あなた）',
+        text: '勝手口の鈴……中の玉が外されていました。',
+        character: 'defense_attorney',
+        next: 'last_arg_broken_bell_2'
+    },
+
+    {
+        id: 'last_arg_broken_bell_2',
+        speaker: '弁護士（あなた）',
+        text: '待った！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'last_arg_broken_bell_3'
+    },
+
+    {
+        id: 'last_arg_broken_bell_3',
+        speaker: '弁護士（あなた）',
+        text: '厨房を抜けたのに鈴が鳴らなかった理由……ゲンさん、あなたが細工したからだ！',
+        character: 'defense_attorney',
+        next: 'gen_break_1'
+    },
+
+    // ============================================================================
+    // ③ 砂糖壺の位置（異議あり）
+    // ============================================================================
+    {
+        id: 'last_arg_sugar_position',
+        speaker: '弁護士（あなた）',
+        text: '砂糖壺は“蔵”に近い側に置いてありました。',
+        character: 'defense_attorney',
+        next: 'last_arg_sugar_position_2'
+    },
+
+    {
+        id: 'last_arg_sugar_position_2',
+        speaker: '弁護士（あなた）',
+        text: '異議あり！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'last_arg_sugar_position_3'
+    },
+
+    {
+        id: 'last_arg_sugar_position_3',
+        speaker: '弁護士（あなた）',
+        text: 'これは蔵まで砂糖を運びやすい配置だった！ あなたが砂糖を持ち出した証拠です！',
+        character: 'defense_attorney',
+        next: 'gen_break_1'
+    },
+
+    // ============================================================================
+    // ④ 手順書（異議あり）
+    // ============================================================================
+    {
+        id: 'last_arg_fire_temp',
+        speaker: '弁護士（あなた）',
+        text: '手順書には“90℃以上で煮てはいけない”とありますが……',
+        character: 'defense_attorney',
+        next: 'last_arg_fire_temp_2'
+    },
+
+    {
+        id: 'last_arg_fire_temp_2',
+        speaker: '弁護士（あなた）',
+        text: '待った！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'last_arg_fire_temp_3'
+    },
+
+    {
+        id: 'last_arg_fire_temp_3',
+        speaker: '弁護士（あなた）',
+        text: '飴を作るには160℃以上必要！ つまりあなたは料理以外の目的で火を使ったんだ！',
+        character: 'defense_attorney',
+        next: 'gen_break_1'
+    },
+
+    // ============================================================================
+    // ⑤ 証拠品突きつけ選択
+    // ============================================================================
+    {
+        id: 'last_arg_evidence_select',
+        speaker: '弁護士（あなた）',
+        text: '（どの証拠を突きつける……？ これで全てが決まる）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '特注ベッコウ飴を突きつける', action: 'present_evidence', next: 'evidence_candy_final' },
+            { text: '砂糖壺を突きつける', action: 'present_evidence', next: 'evidence_sugar_final' },
+            { text: '壊れた鈴を突きつける', action: 'present_evidence', next: 'evidence_bell_final' }
+        ],
+        correctEvidence: 'candy_object',
+        successNext: 'evidence_candy_final',
+        failureNext: 'evidence_fail_generic'
+    },
+
+    {
+        id: 'evidence_fail_generic',
+        speaker: '裁判長',
+        text: '弁護人、その証拠では“調理した場所”を説明できません。',
+        character: 'judge',
+        next: 'defense_last_argument_menu'
+    },
+
+    // ============================================================================
+    // 証拠成功：巨大飴
+    // ============================================================================
+    {
+        id: 'evidence_candy_final',
+        speaker: '弁護士（あなた）',
+        text: '異議あり！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'evidence_candy_final_2'
+    },
+
+    {
+        id: 'evidence_candy_final_2',
+        speaker: '弁護士（あなた）',
+        text: 'この“特注ベッコウ飴”こそ……調理場所の決定的証拠です。',
+        character: 'defense_attorney',
+        next: 'evidence_candy_final_3'
+    },
+
+    {
+        id: 'evidence_candy_final_3',
+        speaker: '弁護士（あなた）',
+        text: '飴の表面に“厨房のタイル模様”が転写されている！',
+        character: 'defense_attorney',
+        next: 'gen_break_1'
+    },
+
+    // ============================================================================
+    // ゲン崩壊
+    // ============================================================================
+    {
+        id: 'gen_break_1',
+        speaker: '証人（板前）',
+        text: 'や、やめろ……やめてくれ……',
+        character: 'chef',
+        next: 'gen_break_2'
+    },
+
+    {
+        id: 'gen_break_2',
+        speaker: '証人（板前）',
+        text: 'もう……無理だ……。',
+        character: 'chef',
+        next: 'gen_break_3'
+    },
+
+    {
+        id: 'gen_break_3',
+        speaker: '証人（板前）',
+        text: 'あっしが……やったんだよ……。',
+        character: 'chef',
+        next: 'gen_confess_1'
+    },
+
+    // ============================================================================
+    // 真相告白
+    // ============================================================================
+
+    {
+        id: 'gen_confess_1',
+        speaker: '証人（板前）',
+        text: '蔵に入って、招き猫を……飴で覆ったのは……全部、あっしだ。',
+        character: 'chef',
+        next: 'gen_confess_2'
+    },
+
+    {
+        id: 'gen_confess_2',
+        speaker: '証人（板前）',
+        text: '砂糖を煮詰めて、鍋で飴を流して、冷まして……重かった……。',
+        character: 'chef',
+        next: 'gen_confess_3'
+    },
+
+    {
+        id: 'gen_confess_3',
+        speaker: '証人（板前）',
+        text: 'あれを“オブジェ”に見せかけて、厨房の勝手口から離れへ運んだんだ……。',
+        character: 'chef',
+        next: 'gen_confess_4'
+    },
+
+    {
+        id: 'gen_confess_4',
+        speaker: '証人（板前）',
+        text: 'もう……観念したよ……。',
+        character: 'chef',
+        next: 'judge_confess_react'
+    },
+
+    {
+        id: 'judge_confess_react',
+        speaker: '裁判長',
+        text: '……驚愕の手口です。弁護人、見事でした。',
+        character: 'judge',
+        next: 'defense_confess_after'
+    },
+
+    {
+        id: 'defense_confess_after',
+        speaker: '弁護士（あなた）',
+        text: '（ゲンさん……なぜこんなことを……？）',
+        character: 'defense_attorney',
+        next: 'defense_need_motive'
+    },
+
+    {
+        id: 'defense_need_motive',
+        speaker: '弁護士（あなた）',
+        text: '裁判長、まだ重要な点があります。',
+        character: 'defense_attorney',
+        next: 'judge_need_motive_reply'
+    },
+
+    {
+        id: 'judge_need_motive_reply',
+        speaker: '裁判長',
+        text: '……動機、ですか。',
+        character: 'judge',
+        next: 'defense_motive_intro'
+    },
+
+    {
+        id: 'defense_motive_intro',
+        speaker: '弁護士（あなた）',
+        text: 'はい。この犯行には……まだ明かされていない“理由”があるはずです。',
+        character: 'defense_attorney',
+        next: null  // → 第9部（動機解明・後日談）へ
+    }
+    // ============================================================================
+    // 第9章：動機解明編（涙の告白と“真の理由”）
+    // ============================================================================
+
+    {
+        id: 'defense_motive_intro',
+        speaker: '弁護士（あなた）',
+        text: 'この事件の核心……それは“動機”です。',
+        character: 'defense_attorney',
+        next: 'judge_motive_start'
+    },
+
+    {
+        id: 'judge_motive_start',
+        speaker: '裁判長',
+        text: '証人・ゲン。あなたが犯行に及んだ理由を話していただきましょう。',
+        character: 'judge',
+        next: 'gen_motive_1'
+    },
+
+    // ============================================================================
+    // ゲンの動機（表向き）
+    // ============================================================================
+
+    {
+        id: 'gen_motive_1',
+        speaker: '証人（板前）',
+        text: '……あっしは……旅館を辞めるつもりだったんだ。',
+        character: 'chef',
+        next: 'gen_motive_2'
+    },
+
+    {
+        id: 'gen_motive_2',
+        speaker: '証人（板前）',
+        text: 'ここの料理長……あいつが新しい人間ばかり可愛がって、あっしには何の仕事もくれねぇ。',
+        character: 'chef',
+        next: 'gen_motive_3'
+    },
+
+    {
+        id: 'gen_motive_3',
+        speaker: '証人（板前）',
+        text: '30年包丁握ってきたのによ……。あっしの腕なんて、誰も見ちゃいねぇ……。',
+        character: 'chef',
+        next: 'gen_motive_4'
+    },
+
+    {
+        id: 'gen_motive_4',
+        speaker: '証人（板前）',
+        text: 'だから……“腕前を見せつけてやりたかった”。',
+        character: 'chef',
+        next: 'gen_motive_5'
+    },
+
+    {
+        id: 'gen_motive_5',
+        speaker: '証人（板前）',
+        text: '自分の“飴細工”で、この旅館を驚かせてやろうと思った……。',
+        character: 'chef',
+        next: 'defense_motive_rebuttal'
+    },
+
+    // ============================================================================
+    // 弁護人の反論：その動機は“嘘”もしくは“不十分”
+    // ============================================================================
+
+    {
+        id: 'defense_motive_rebuttal',
+        speaker: '弁護士（あなた）',
+        text: '（……それだけで、こんな大掛かりな犯行をするだろうか？）',
+        character: 'defense_attorney',
+        next: 'defense_motive_rebuttal_2'
+    },
+
+    {
+        id: 'defense_motive_rebuttal_2',
+        speaker: '弁護士（あなた）',
+        text: 'ゲンさん。あなたの話には“決定的に足りないもの”があります。',
+        character: 'defense_attorney',
+        next: 'defense_motive_menu'
+    },
+
+    // ============================================================================
+    // プレイヤーが“真の動機”を探るフェーズ
+    // どれが異議ありなのか分からない選択肢構成
+    // ============================================================================
+    {
+        id: 'defense_motive_menu',
+        speaker: '弁護士（あなた）',
+        text: '（ゲンさんの胸の奥には……まだ隠された理由がある）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '旅館への不満について掘り下げる', next: 'motive_dig_grudge' },
+            { text: '招き猫との“関係”を疑う', next: 'motive_dig_cat' },
+            { text: '飴作りの技術の習得経緯', next: 'motive_dig_craft' },
+            { text: 'レンとの関係性', next: 'motive_dig_ren' },
+            { text: '金銭的事情', next: 'motive_dig_money' }
+        ]
+    },
+
+    // ============================================================================
+    // ① 旅館への不満—普通ルート
+    // ============================================================================
+    {
+        id: 'motive_dig_grudge',
+        speaker: '弁護士（あなた）',
+        text: 'その“不満”、何年も前から続いていたんじゃないですか？',
+        character: 'defense_attorney',
+        next: 'motive_dig_grudge_2'
+    },
+
+    {
+        id: 'motive_dig_grudge_2',
+        speaker: '証人（板前）',
+        text: '……まぁな。だが、それがどうした。',
+        character: 'chef',
+        next: 'defense_motive_menu'
+    },
+
+    // ============================================================================
+    // ② 招き猫との関係—異議ありルート
+    // ============================================================================
+    {
+        id: 'motive_dig_cat',
+        speaker: '弁護士（あなた）',
+        text: 'あなたはあの“黄金の招き猫”をどう思っていた？',
+        character: 'defense_attorney',
+        next: 'motive_dig_cat_2'
+    },
+
+    {
+        id: 'motive_dig_cat_2',
+        speaker: '証人（板前）',
+        text: 'どうも何も……ただの飾りじゃねぇか。',
+        character: 'chef',
+        next: 'motive_dig_cat_3'
+    },
+
+    {
+        id: 'motive_dig_cat_3',
+        speaker: '弁護士（あなた）',
+        text: '——待った！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'motive_dig_cat_4'
+    },
+
+    {
+        id: 'motive_dig_cat_4',
+        speaker: '弁護士（あなた）',
+        text: 'ただの飾り？ とんでもない。',
+        character: 'defense_attorney',
+        next: 'motive_dig_cat_5'
+    },
+
+    {
+        id: 'motive_dig_cat_5',
+        speaker: '弁護士（あなた）',
+        text: '招き猫は“板場にとって神棚と同じ意味”を持つと、当番表に書かれています。',
+        character: 'defense_attorney',
+        next: 'motive_dig_cat_6'
+    },
+
+    {
+        id: 'motive_dig_cat_6',
+        speaker: '証人（板前）',
+        text: '……ッ！！',
+        character: 'chef',
+        next: 'motive_trigger_tear_1'
+    },
+
+    // ============================================================================
+    // ③ 飴作りの技術—普通→後に真相へ繋がる伏線
+    // ============================================================================
+    {
+        id: 'motive_dig_craft',
+        speaker: '弁護士（あなた）',
+        text: '飴細工……かなり高度な技術です。どこで学んだんです？',
+        character: 'defense_attorney',
+        next: 'motive_dig_craft_2'
+    },
+
+    {
+        id: 'motive_dig_craft_2',
+        speaker: '証人（板前）',
+        text: '昔な……菓子職人になる夢もあったんだ。',
+        character: 'chef',
+        next: 'defense_motive_menu'
+    },
+
+    // ============================================================================
+    // ④ レンとの関係—異議ありルート（核心）
+    // ============================================================================
+    {
+        id: 'motive_dig_ren',
+        speaker: '弁護士（あなた）',
+        text: 'あなたは……レン君のことをどう思っていました？',
+        character: 'defense_attorney',
+        next: 'motive_dig_ren_2'
+    },
+
+    {
+        id: 'motive_dig_ren_2',
+        speaker: '証人（板前）',
+        text: 'あいつは……素直で、いい子だよ。',
+        character: 'chef',
+        next: 'motive_dig_ren_3'
+    },
+
+    {
+        id: 'motive_dig_ren_3',
+        speaker: '弁護士（あなた）',
+        text: '……異議あり！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'motive_dig_ren_4'
+    },
+
+    {
+        id: 'motive_dig_ren_4',
+        speaker: '弁護士（あなた）',
+        text: 'だったらどうして、レン君を犯人に仕立て上げるようなことをした！？',
+        character: 'defense_attorney',
+        next: 'motive_dig_ren_5'
+    },
+
+    {
+        id: 'motive_dig_ren_5',
+        speaker: '証人（板前）',
+        text: '……ッ……！！',
+        character: 'chef',
+        next: 'motive_trigger_tear_1'
+    },
+
+    // ============================================================================
+    // ⑤ 金銭問題—普通ルート
+    // ============================================================================
+    {
+        id: 'motive_dig_money',
+        speaker: '弁護士（あなた）',
+        text: 'お金に困っていたという話は？',
+        character: 'defense_attorney',
+        next: 'motive_dig_money_2'
+    },
+
+    {
+        id: 'motive_dig_money_2',
+        speaker: '証人（板前）',
+        text: '金は……困ってなかった。借金もねぇ。',
+        character: 'chef',
+        next: 'defense_motive_menu'
+    },
+
+    // ============================================================================
+    // 異議ありの連鎖 → ゲンの崩壊が始まる
+    // ============================================================================
+    {
+        id: 'motive_trigger_tear_1',
+        speaker: '弁護士（あなた）',
+        text: 'ゲンさん……あなたは、本当は誰にも見せたくなかったんじゃないですか。',
+        character: 'defense_attorney',
+        next: 'motive_trigger_tear_2'
+    },
+
+    {
+        id: 'motive_trigger_tear_2',
+        speaker: '証人（板前）',
+        text: '………………',
+        character: 'chef',
+        next: 'motive_trigger_tear_3'
+    },
+
+    {
+        id: 'motive_trigger_tear_3',
+        speaker: '弁護士（あなた）',
+        text: 'あなたの“飴細工”……あれは誰のために作ったんです？',
+        character: 'defense_attorney',
+        next: 'motive_trigger_tear_4'
+    },
+
+    {
+        id: 'motive_trigger_tear_4',
+        speaker: '証人（板前）',
+        text: '…………………………。',
+        character: 'chef',
+        next: 'motive_trigger_tear_5'
+    },
+
+    {
+        id: 'motive_trigger_tear_5',
+        speaker: '証人（板前）',
+        text: '……あっしの……か、家族のためだよ……。',
+        character: 'chef',
+        next: 'motive_confess_family_1'
+    },
+
+    // ============================================================================
+    // 真の動機
+    // ============================================================================
+    {
+        id: 'motive_confess_family_1',
+        speaker: '証人（板前）',
+        text: '……昔な……娘がいたんだ……。',
+        character: 'chef',
+        next: 'motive_confess_family_2'
+    },
+
+    {
+        id: 'motive_confess_family_2',
+        speaker: '証人（板前）',
+        text: '小さい頃、菓子屋の前で飴細工を見てよ……目を輝かせて……。',
+        character: 'chef',
+        next: 'motive_confess_family_3'
+    },
+
+    {
+        id: 'motive_confess_family_3',
+        speaker: '証人（板前）',
+        text: '「お父さんの飴、見たい」って……いつも言ってた……。',
+        character: 'chef',
+        next: 'motive_confess_family_4'
+    },
+
+    {
+        id: 'motive_confess_family_4',
+        speaker: '証人（板前）',
+        text: 'だが……その子は病気で……もういねぇ……。',
+        character: 'chef',
+        next: 'motive_confess_family_5'
+    },
+
+    {
+        id: 'motive_confess_family_5',
+        speaker: '証人（板前）',
+        text: 'だから……せめて……形だけでも……夢の続きを……見せてやりたかった……。',
+        character: 'chef',
+        next: 'gen_tear_fall'
+    },
+
+    // ============================================================================
+    // 号泣
+    // ============================================================================
+    {
+        id: 'gen_tear_fall',
+        speaker: '証人（板前）',
+        text: 'うっ……うぅ……あぁぁぁ……！！',
+        character: 'chef',
+        next: 'judge_reaction_motive'
+    },
+
+    // ============================================================================
+    // 裁判長の静かな反応
+    // ============================================================================
+    {
+        id: 'judge_reaction_motive',
+        speaker: '裁判長',
+        text: '………………。なんと、悲しい理由でしょうか。',
+        character: 'judge',
+        next: 'defense_motive_conclusion'
+    },
+
+    {
+        id: 'defense_motive_conclusion',
+        speaker: '弁護士（あなた）',
+        text: '（ゲンさん……そんな理由が……）',
+        character: 'defense_attorney',
+        next: 'judge_prepare_final'
+    },
+
+    {
+        id: 'judge_prepare_final',
+        speaker: '裁判長',
+        text: '弁護人、検察官。動機は明らかになりました。',
+        character: 'judge',
+        next: 'judge_prepare_final_2'
+    },
+
+    {
+        id: 'judge_prepare_final_2',
+        speaker: '裁判長',
+        text: 'あとは……最終的な“責任の所在”を判断するのみです。',
+        character: 'judge',
+        next: 'defense_final_prebattle'
+    },
+
+    {
+        id: 'defense_final_prebattle',
+        speaker: '弁護士（あなた）',
+        text: '（いよいよだ……ここから第10部、最終章へ続く……！）',
+        character: 'defense_attorney',
+        next: null  // → 第10部（最終章・判決）へ
+    }
+    // ============================================================================
+    // 第10章：最終章（判決・完全無罪エンディング）
+    // ============================================================================
+
+    {
+        id: 'defense_final_prebattle',
+        speaker: '弁護士（あなた）',
+        text: '（ここからは文字通りの最終決戦……レンの未来は、この弁論にかかっている）',
+        character: 'defense_attorney',
+        next: 'judge_final_call'
+    },
+
+    {
+        id: 'judge_final_call',
+        speaker: '裁判長',
+        text: '双方、最終弁論の準備はよろしいですか？',
+        character: 'judge',
+        next: 'prosecutor_final_start'
+    },
+
+    // ============================================================================
+    // 検察官・最終弁論
+    // ============================================================================
+    {
+        id: 'prosecutor_final_start',
+        speaker: '検察官',
+        text: '……昨夜、蔵に鍵を使って入ったのは被告人レン。ただ一人です。',
+        character: 'prosecutor',
+        next: 'prosecutor_final_2'
+    },
+
+    {
+        id: 'prosecutor_final_2',
+        speaker: '検察官',
+        text: '招き猫が消えたのもその直後……これだけでも十分に嫌疑は濃い。',
+        character: 'prosecutor',
+        next: 'prosecutor_final_3'
+    },
+
+    {
+        id: 'prosecutor_final_3',
+        speaker: '検察官',
+        text: '確かにゲンの自白はあった。しかし、それがすべて真実だと証明できるのか？',
+        character: 'prosecutor',
+        next: 'prosecutor_final_menu'
+    },
+
+    // ============================================================================
+    // プレイヤー → 反証するフェーズ（隠し異議あり含む）
+    // ============================================================================
+    {
+        id: 'prosecutor_final_menu',
+        speaker: '弁護士（あなた）',
+        text: '（検察官……まだ反撃するつもりか。ここで完全に封じる！）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '密室トリックの破綻を指摘', next: 'final_contradiction_lock' },
+            { text: 'ゲンの自白の信頼性を強調', next: 'final_contradiction_confess' },
+            { text: '匂いと金属音の一致を示す', next: 'final_contradiction_sound_smell' },
+            { text: '（沈黙して観察する）', next: 'final_contradiction_observe' }
+        ]
+    },
+
+    // ============================================================================
+    // ① 密室トリック崩壊ルート（異議あり）
+    // ============================================================================
+    {
+        id: 'final_contradiction_lock',
+        speaker: '弁護士（あなた）',
+        text: '検察官……これでもまだ“密室”だと言い張るつもりですか？',
+        character: 'defense_attorney',
+        next: 'final_contradiction_lock_2'
+    },
+
+    {
+        id: 'final_contradiction_lock_2',
+        speaker: '弁護士（あなた）',
+        text: '異議あり！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'final_contradiction_lock_3'
+    },
+
+    {
+        id: 'final_contradiction_lock_3',
+        speaker: '弁護士（あなた）',
+        text: 'ダストシュートを使って人は出入り可能だった。密室は成立しません！',
+        character: 'defense_attorney',
+        next: 'prosecutor_final_shock'
+    },
+
+    // ============================================================================
+    // ② 自白の信頼性ルート（異議あり）
+    // ============================================================================
+    {
+        id: 'final_contradiction_confess',
+        speaker: '弁護士（あなた）',
+        text: 'ゲンさんの自白……あなたは“軽いもの”だと思っていませんか？',
+        character: 'defense_attorney',
+        next: 'final_contradiction_confess_2'
+    },
+
+    {
+        id: 'final_contradiction_confess_2',
+        speaker: '弁護士（あなた）',
+        text: '待った！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'final_contradiction_confess_3'
+    },
+
+    {
+        id: 'final_contradiction_confess_3',
+        speaker: '弁護士（あなた）',
+        text: '自白には“犯行状況と一致する事実”が複数含まれている！ 偽りようがない！',
+        character: 'defense_attorney',
+        next: 'prosecutor_final_shock'
+    },
+
+    // ============================================================================
+    // ③ 匂い＋金属音ルート（異議あり）
+    // ============================================================================
+    {
+        id: 'final_contradiction_sound_smell',
+        speaker: '弁護士（あなた）',
+        text: '事件当夜の“不審な二つの現象”を思い出してください。',
+        character: 'defense_attorney',
+        next: 'final_contradiction_sound_smell_2'
+    },
+
+    {
+        id: 'final_contradiction_sound_smell_2',
+        speaker: '弁護士（あなた）',
+        text: '異議あり！！',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'final_contradiction_sound_smell_3'
+    },
+
+    {
+        id: 'final_contradiction_sound_smell_3',
+        speaker: '弁護士（あなた）',
+        text: '“甘い焦げた匂い”と“金属音”。 これが一致する人物は……ゲンさんだけです！',
+        character: 'defense_attorney',
+        next: 'prosecutor_final_shock'
+    },
+
+    // ============================================================================
+    // ④ 沈黙ルート（検察側の自滅を誘う）※異議ありは起きない
+    // ============================================================================
+    {
+        id: 'final_contradiction_observe',
+        speaker: '弁護士（あなた）',
+        text: '（……あえて何も言わない。検察官は今、焦っている……）',
+        character: 'defense_attorney',
+        next: 'final_contradiction_observe_2'
+    },
+
+    {
+        id: 'final_contradiction_observe_2',
+        speaker: '検察官',
+        text: '……っ……！ しかし、しかし……証拠が……！ 証拠が……！',
+        character: 'prosecutor',
+        next: 'prosecutor_final_shock'
+    },
+
+    // ============================================================================
+    // 検察官・完全崩壊
+    // ============================================================================
+    {
+        id: 'prosecutor_final_shock',
+        speaker: '検察官',
+        text: '……もう、いい。これ以上は……立証できない。',
+        character: 'prosecutor',
+        next: 'judge_verdict_intro'
+    },
+
+    // ============================================================================
+    // 判決フェーズ
+    // ============================================================================
+
+    {
+        id: 'judge_verdict_intro',
+        speaker: '裁判長',
+        text: '……静粛に。これより判決を言い渡します。',
+        character: 'judge',
+        next: 'judge_verdict_1'
+    },
+
+    {
+        id: 'judge_verdict_1',
+        speaker: '裁判長',
+        text: '本件は、ゲン証人による飴細工トリックにより引き起こされたものと認定。',
+        character: 'judge',
+        next: 'judge_verdict_2'
+    },
+
+    {
+        id: 'judge_verdict_2',
+        speaker: '裁判長',
+        text: '被告人レンについては、嫌疑を晴らすに足りる証拠が存在する。',
+        character: 'judge',
+        next: 'judge_verdict_3'
+    },
+
+    {
+        id: 'judge_verdict_3',
+        speaker: '裁判長',
+        text: 'よって……被告人・レン……——',
+        character: 'judge',
+        next: 'judge_verdict_4'
+    },
+
+    {
+        id: 'judge_verdict_4',
+        speaker: '裁判長',
+        text: '無罪！！',
+        character: 'judge',
+        cutIn: 'not_guilty',
+        next: 'ren_reaction_1'
+    },
+
+    // ============================================================================
+    // レンの解放
+    // ============================================================================
+    {
+        id: 'ren_reaction_1',
+        speaker: '被告人（レン）',
+        text: '……！ ほ、本当に……僕……助かったんですか……？',
+        character: 'suspect_image',
+        next: 'ren_reaction_2'
+    },
+
+    {
+        id: 'ren_reaction_2',
+        speaker: '弁護士（あなた）',
+        text: 'ああ。君は自由だ。胸を張っていい。',
+        character: 'defense_attorney',
+        next: 'ren_reaction_3'
+    },
+
+    {
+        id: 'ren_reaction_3',
+        speaker: '被告人（レン）',
+        text: '……ありがとうございました！！',
+        character: 'suspect_image',
+        next: 'gen_apology_intro'
+    },
+
+    // ============================================================================
+    // ゲンの謝罪と和解
+    // ============================================================================
+
+    {
+        id: 'gen_apology_intro',
+        speaker: '証人（板前）',
+        text: '……レン。すまねぇ……。',
+        character: 'chef',
+        next: 'gen_apology_2'
+    },
+
+    {
+        id: 'gen_apology_2',
+        speaker: '証人（板前）',
+        text: 'お前を巻き込むつもりはなかったんだ。ほんとに……すまねぇ……。',
+        character: 'chef',
+        next: 'ren_apology_reply'
+    },
+
+    {
+        id: 'ren_apology_reply',
+        speaker: '被告人（レン）',
+        text: 'ゲンさん……僕、怒ってません。僕はあなたの料理、好きでしたから……。',
+        character: 'suspect_image',
+        next: 'gen_cry_final'
+    },
+
+    {
+        id: 'gen_cry_final',
+        speaker: '証人（板前）',
+        text: '……ば、馬鹿野郎……！ ……そんな優しい事言うんじゃねぇ……！',
+        character: 'chef',
+        next: 'judge_closing'
+    },
+
+    // ============================================================================
+    // 裁判終了
+    // ============================================================================
+    {
+        id: 'judge_closing',
+        speaker: '裁判長',
+        text: '本件は以上で閉廷とします。',
+        character: 'judge',
+        next: 'epilogue_intro'
+    },
+
+    // ============================================================================
+    // エピローグ
+    // ============================================================================
+
+    {
+        id: 'epilogue_intro',
+        speaker: 'システム',
+        text: '【エピローグ】　事件から一週間後——。',
+        character: null,
+        next: 'epilogue_scene_1'
+    },
+
+    {
+        id: 'epilogue_scene_1',
+        speaker: 'システム',
+        text: '旅館には再び活気が戻り、レンは笑顔で働いている。',
+        character: null,
+        next: 'epilogue_scene_2'
+    },
+
+    {
+        id: 'epilogue_scene_2',
+        speaker: 'システム',
+        text: 'ゲンは罪を償うために自主しつつも……厨房には彼の“飴細工”が一つだけ残された。',
+        character: null,
+        next: 'epilogue_scene_3'
+    },
+
+    {
+        id: 'epilogue_scene_3',
+        speaker: 'システム',
+        text: 'その中央には、小さな紙切れが添えられていた。',
+        character: null,
+        next: 'epilogue_scene_4'
+    },
+
+    {
+        id: 'epilogue_scene_4',
+        speaker: 'システム',
+        text: '「娘へ。父ちゃんは、やっと自分の飴を人に見せられたよ」',
+        character: null,
+        next: 'epilogue_scene_5'
+    },
+
+    {
+        id: 'epilogue_scene_5',
+        speaker: 'システム',
+        text: 'そしてその飴は、まるで微笑むような輝きを放っていた——。',
+        character: null,
+        next: 'happy_end_final'
+    },
+
+    {
+        id: 'happy_end_final',
+        speaker: 'システム',
+        text: '【完全勝利】　あなたは全ての矛盾を暴き、レンの無罪と真犯人を証明した！',
+        character: null,
+        next: null
+    }
+
+
+    // ============================================================================
+    // 証拠リスト
+    // ============================================================================
+    const evidenceList = [
+
+    {
+        id: 'floor_map',
+        name: '旅館の見取り図',
+        description: '旅館の詳細な図面。蔵、厨房、離れ、ゴミ集積所の位置関係が描かれており、東側壁の「隠しダストシュート」も記されている。',
+        image: 'evidence_map.png'
+    },
+
+    {
+        id: 'cooking_manual',
+        name: '調理手順書',
+        description: '板場の公式マニュアル。「ブリ大根は加熱後、必ず30分冷まして味を含ませるべし」と書かれ、10時時点の火の使用は不要である。',
+        image: 'evidence_clock.png'
+    },
+
+    {
+        id: 'sugar_pot',
+        name: '空の砂糖壺',
+        description: '厨房に置かれた業務用の砂糖壺。前夜に補充されたはずだが完全に空になっており、大量の砂糖が使われた形跡がある。',
+        image: 'evidence_paper.png'
+    },
+
+    {
+        id: 'candy_object',
+        name: '特注ベッコウ飴',
+        description: '西園寺の部屋にあった巨大な飴の塊。甘い香りがするが異常に重く、表面には「厨房のタイル模様」が微かに転写されている。',
+        image: 'evidence_candy.png'
+    },
+
+    {
+        id: 'duty_log',
+        name: '当番表',
+        description: '事件当日のシフト表。被告人レンが蔵の見回り担当、ゲンが厨房での仕込み担当であることが示されている。',
+        image: 'evidence_paper.png'
+    },
+
+    {
+        id: 'broken_bell',
+        name: '壊れた鈴',
+        description: '勝手口に設置されていた鈴。中の玉が意図的に取り外されており、開閉しても音が鳴らない状態になっている。',
+        image: 'evidence_bell.png'
+    },
+
+    {
+        id: 'scorch_mark',
+        name: '厨房の焦げ跡',
+        description: '厨房の壁に残されていた黒い焦げ跡。砂糖を高温で煮詰めた際に跳ねた痕に酷似している。',
+        image: 'evidence_scorch.png'
+    },
+
+    {
+        id: 'metal_pot',
+        name: '飴用に使われた鍋',
+        description: '厨房の隅で見つかった重い金属鍋。内側に飴が固まった痕跡が残っており、金属音を立てながら運ばれた可能性が高い。',
+        image: 'evidence_pot.png'
+    },
+
+    {
+        id: 'tile_chip',
+        name: 'タイルの欠片',
+        description: '特注ベッコウ飴の底面に付着していた小さな白いタイル片。厨房の床材と一致する。',
+        image: 'evidence_tile.png'
+    },
+
+    {
+        id: 'family_photo',
+        name: '古い家族写真',
+        description: 'ゲンのロッカーから見つかった写真。幼い娘とゲンが並んで写っており、裏には「お父さんの飴、見たいな」と走り書きがある。',
+        image: 'evidence_photo.png'
+    }
+
+];
+

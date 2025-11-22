@@ -1,0 +1,1290 @@
+const scenario = [
+
+    // ============================================================================
+    // 序章：開廷と事件の説明
+    // ============================================================================
+
+    {
+        id: 'start',
+        speaker: '裁判長',
+        text: 'これより、「老人会百周年記念 銀杯盗難事件」の審理を開始します。',
+        character: 'judge',
+        next: 'opening_1'
+    },
+
+    {
+        id: 'opening_1',
+        speaker: '検察官',
+        text: '本件は、地域老人会が100年の節目として大切に保管していた伝統の「銀杯」が、式典前日の夜に盗まれた事件です。',
+        character: 'prosecutor',
+        next: 'opening_2'
+    },
+
+    {
+        id: 'opening_2',
+        speaker: '検察官',
+        text: '銀杯は歴史的価値が高く、鑑定額は300万円以上。老人会の象徴でもあります。',
+        character: 'prosecutor',
+        next: 'opening_3'
+    },
+
+    {
+        id: 'opening_3',
+        speaker: '検察官',
+        text: '保管場所であった「老人会館の応接間」は鍵が管理されており、事件当時、鍵の所持者は二名のみ。',
+        character: 'prosecutor',
+        next: 'opening_4'
+    },
+
+    {
+        id: 'opening_4',
+        speaker: '検察官',
+        text: 'その一人が——被告人である、若手介護職員・ミナミです。',
+        character: 'prosecutor',
+        next: 'opening_5'
+    },
+
+    {
+        id: 'opening_5',
+        speaker: '検察官',
+        text: '鍵を使えるのは会長の黒川タツジ氏（80）と、被告人ミナミだけ。その上、盗難当日、応接間に出入りした姿が目撃されていたのはミナミだけでした。',
+        character: 'prosecutor',
+        next: 'opening_6'
+    },
+
+    {
+        id: 'opening_6',
+        speaker: '検察官',
+        text: 'よって、被告人が銀杯を持ち去った可能性が極めて高いと検察は主張します。',
+        character: 'prosecutor',
+        next: 'defense_opening_1'
+    },
+
+    {
+        id: 'defense_opening_1',
+        speaker: '弁護士（あなた）',
+        text: '（老人会の百周年記念……銀杯は高齢者にとって並々ならぬ価値がある。盗難となれば“裏切り”だと捉えられるだろう）',
+        character: 'defense_attorney',
+        next: 'defense_opening_2'
+    },
+
+    {
+        id: 'defense_opening_2',
+        speaker: '弁護士（あなた）',
+        text: '（だが、被告人ミナミは無実を訴えている。事件にはもっと深い事情があるはず……）',
+        character: 'defense_attorney',
+        next: 'judge_call_witness1'
+    },
+
+
+    // ============================================================================
+    // 第1章：証人1・老人会会長（黒川タツジ）の証言
+    // ============================================================================
+
+    {
+        id: 'judge_call_witness1',
+        speaker: '裁判長',
+        text: 'では証人として、老人会会長の黒川タツジ氏を呼びます。',
+        character: 'judge',
+        next: 'kurokawa_enter'
+    },
+
+    {
+        id: 'kurokawa_enter',
+        speaker: '証人（黒川）',
+        text: 'わしが黒川じゃ。80になっても、まだまだ若いもんには負けんつもりだ。',
+        character: 'witness_kurokawa',
+        next: 'kurokawa_testimony_1'
+    },
+
+    {
+        id: 'kurokawa_testimony_1',
+        speaker: '検察官',
+        text: '事件当日の状況を話していただけますか？',
+        character: 'prosecutor',
+        next: 'kurokawa_testimony_2'
+    },
+
+    {
+        id: 'kurokawa_testimony_2',
+        speaker: '証人（黒川）',
+        text: 'あの日は、百周年記念式典の準備をしとった。老人会館の応接間には“銀杯”を飾っておいたんじゃ。',
+        character: 'witness_kurokawa',
+        next: 'kurokawa_testimony_3'
+    },
+
+    {
+        id: 'kurokawa_testimony_3',
+        speaker: '証人（黒川）',
+        text: '銀杯は、わしらの先祖が戦争から戻った記念に作られた家宝だ。盗まれたと聞いたときは、心臓が止まるかと思ったわい……。',
+        character: 'witness_kurokawa',
+        next: 'kurokawa_testimony_4'
+    },
+
+    {
+        id: 'kurokawa_testimony_4',
+        speaker: '証人（黒川）',
+        text: '応接間の鍵は、わしと介護職員のミナミくんの二人しか持っておらん。鍵の複製は禁止されておる。',
+        character: 'witness_kurokawa',
+        next: 'kurokawa_testimony_5'
+    },
+
+    {
+        id: 'kurokawa_testimony_5',
+        speaker: '証人（黒川）',
+        text: '事件当日、わしは夕方6時に鍵を確認し、応接間の戸締まりをした。しかし——翌朝9時には銀杯が消えておった。',
+        character: 'witness_kurokawa',
+        next: 'kurokawa_testimony_6'
+    },
+
+    {
+        id: 'kurokawa_testimony_6',
+        speaker: '証人（黒川）',
+        text: '夜の間に応接間に入れたのは、ミナミくんだけじゃよ。',
+        character: 'witness_kurokawa',
+        next: 'defense_cross_kurokawa_intro'
+    },
+
+    // ---------------------------------------------------------------------------
+    // 黒川への反対尋問
+    // ---------------------------------------------------------------------------
+
+    {
+        id: 'defense_cross_kurokawa_intro',
+        speaker: '弁護士（あなた）',
+        text: '（黒川会長の証言……確かに状況だけ見ればミナミが犯人に見える。しかし、この老人会館には“もう一つの特徴”があったはずだ）',
+        character: 'defense_attorney',
+        next: 'defense_cross_kurokawa_menu'
+    },
+
+    {
+        id: 'defense_cross_kurokawa_menu',
+        speaker: '弁護士（あなた）',
+        text: '（さて、どこから切り込むべきか……）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '鍵の管理状況について聞く', next: 'ask_kuro_key' },
+            { text: '銀杯の保管状態について聞く', next: 'ask_kuro_cup' },
+            { text: '老人会館の夜間の様子について聞く', next: 'ask_kuro_hall' },
+            { text: '銀杯の価値について聞く', next: 'ask_kuro_value' }
+        ]
+    },
+
+    {
+        id: 'ask_kuro_key',
+        speaker: '弁護士（あなた）',
+        text: '鍵の管理について詳しく聞かせてください。保管場所や扱い方などは？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_key'
+    },
+
+    {
+        id: 'kuro_reply_key',
+        speaker: '証人（黒川）',
+        text: '鍵はわしが腰につけておる。ミナミくんには担当として特別に合鍵を渡しておったが、扱いは厳重にするよう言っておったぞ。',
+        character: 'witness_kurokawa',
+        next: 'defense_cross_kurokawa_menu'
+    },
+
+    {
+        id: 'ask_kuro_cup',
+        speaker: '弁護士（あなた）',
+        text: '銀杯はどのように保管されていたのですか？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_cup'
+    },
+
+    {
+        id: 'kuro_reply_cup',
+        speaker: '証人（黒川）',
+        text: '応接間の中央のガラス棚にな。鍵はかけておらん。が、応接間自体に鍵がかかっておれば問題ない。',
+        character: 'witness_kurokawa',
+        next: 'defense_cross_kurokawa_menu'
+    },
+
+    {
+        id: 'ask_kuro_hall',
+        speaker: '弁護士（あなた）',
+        text: '事件当日の老人会館の夜間の様子はどうでしたか？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_hall'
+    },
+
+    {
+        id: 'kuro_reply_hall',
+        speaker: '証人（黒川）',
+        text: '夜は基本的には誰もおらん。警備員もおらんから、防犯カメラと戸締まりだけが頼りじゃ。',
+        character: 'witness_kurokawa',
+        next: 'defense_cross_kurokawa_menu'
+    },
+
+    {
+        id: 'ask_kuro_value',
+        speaker: '弁護士（あなた）',
+        text: '銀杯の価値はどれほどのものなのでしょうか？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_value'
+    },
+
+    {
+        id: 'kuro_reply_value',
+        speaker: '証人（黒川）',
+        text: '金銭的価値は300万程度と聞いとる。しかし精神的価値はそれ以上じゃ。わしら高齢者の誇りそのものよ。',
+        character: 'witness_kurokawa',
+        next: 'defense_cross_kurokawa_menu'
+    },
+
+    // ----------------------------------------
+    // 黒川証言の「違和感」への伏線
+    // ----------------------------------------
+
+    {
+        id: 'defense_kurokawa_flag',
+        speaker: '弁護士（あなた）',
+        text: '（銀杯が置かれていた応接間……しかし、老人会館には“もう一つの侵入経路”が存在したはずだ）',
+        character: 'defense_attorney',
+        next: 'defense_kurokawa_flag2'
+    },
+
+    {
+        id: 'defense_kurokawa_flag2',
+        speaker: '弁護士（あなた）',
+        text: '（次の証人で、その謎が浮かび上がるだろう）',
+        character: 'defense_attorney',
+        next: 'judge_call_witness2'
+    },
+    // ============================================================================
+// 第2章：証人2・介護職員 三浦ナオト
+// ============================================================================
+
+
+    {
+        id: 'judge_call_witness2',
+        speaker: '裁判長',
+        text: 'では次の証人。老人会館で介護職員として勤務する三浦ナオト氏、前へ。',
+        character: 'judge',
+        next: 'miura_enter'
+    },
+
+    {
+        id: 'miura_enter',
+        speaker: '証人（三浦）',
+        text: '……三浦ナオトです。普段は老人会館の巡回や介護補助を担当しています。',
+        character: 'witness_miura',
+        next: 'miura_testimony_1'
+    },
+
+    {
+        id: 'miura_testimony_1',
+        speaker: '検察官',
+        text: '三浦さん、あなたは事件当日、どのような業務をしていましたか？',
+        character: 'prosecutor',
+        next: 'miura_testimony_2'
+    },
+
+    {
+        id: 'miura_testimony_2',
+        speaker: '証人（三浦）',
+        text: '夕方までは巡回と荷物整理です。夜は鍵の点検をして帰宅しました。',
+        character: 'witness_miura',
+        next: 'miura_testimony_3'
+    },
+
+    {
+        id: 'miura_testimony_3',
+        speaker: '証人（三浦）',
+        text: '応接間の鍵は僕も持たされています。黒川会長に頼まれて“銀杯の配置確認”をしたためです。',
+        character: 'witness_miura',
+        next: 'miura_testimony_4'
+    },
+
+    {
+        id: 'miura_testimony_4',
+        speaker: '証人（三浦）',
+        text: 'その日の19時頃、一度応接間に入って銀杯の位置を確認しました。',
+        character: 'witness_miura',
+        next: 'miura_testimony_5'
+    },
+
+    {
+        id: 'miura_testimony_5',
+        speaker: '証人（三浦）',
+        text: 'その後、鍵を閉め、戸締まりを確認して館を出ました。銀杯はその時点では確かにありました。',
+        character: 'witness_miura',
+        next: 'miura_testimony_6'
+    },
+
+    {
+        id: 'miura_testimony_6',
+        speaker: '証人（三浦）',
+        text: '僕は絶対に盗んでいません……信じてください！',
+        character: 'witness_miura',
+        next: 'defense_cross_miura_intro'
+    },
+
+    // ---------------------------------------------------------------------------
+    // 三浦への反対尋問
+    // ---------------------------------------------------------------------------
+
+    {
+        id: 'defense_cross_miura_intro',
+        speaker: '弁護士（あなた）',
+        text: '（三浦……彼は被告人ミナミとは仲がいい。だが事件当日はこの男が“最後に銀杯を見た人物”でもある）',
+        character: 'defense_attorney',
+        next: 'defense_cross_miura_menu'
+    },
+
+    {
+        id: 'defense_cross_miura_menu',
+        speaker: '弁護士（あなた）',
+        text: '（どこを突いて矛盾を引き出す……？）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '19時の行動について詳しく', next: 'ask_miura_19' },
+            { text: '鍵の扱いについて', next: 'ask_miura_key' },
+            { text: '応接間を出た後の行動', next: 'ask_miura_after' },
+            { text: '老人会館の構造と巡回ルート', next: 'ask_miura_route' }
+        ]
+    },
+
+    {
+        id: 'ask_miura_19',
+        speaker: '弁護士（あなた）',
+        text: '19時の時点で応接間に入ったとのことですが、その時なぜ一人で？',
+        character: 'defense_attorney',
+        next: 'miura_reply_19'
+    },
+
+    {
+        id: 'miura_reply_19',
+        speaker: '証人（三浦）',
+        text: '会長からの頼みだったからです。「置き方が曲がっていないか見てこい」と言われまして。',
+        character: 'witness_miura',
+        next: 'defense_cross_miura_menu'
+    },
+
+    {
+        id: 'ask_miura_key',
+        speaker: '弁護士（あなた）',
+        text: '鍵はその後、どう扱ったのですか？',
+        character: 'defense_attorney',
+        next: 'miura_reply_key'
+    },
+
+    {
+        id: 'miura_reply_key',
+        speaker: '証人（三浦）',
+        text: '会長に返却する予定でしたが、その日は会長が老人会館を出ていたので、自分のロッカーの鍵付き引き出しにしまいました。',
+        character: 'witness_miura',
+        next: 'defense_cross_miura_menu'
+    },
+
+    {
+        id: 'ask_miura_after',
+        speaker: '弁護士（あなた）',
+        text: '応接間を出た後、どこに行きましたか？',
+        character: 'defense_attorney',
+        next: 'miura_reply_after'
+    },
+
+    {
+        id: 'miura_reply_after',
+        speaker: '証人（三浦）',
+        text: '倉庫で使わなくなった備品の整理をしました。そのあと暗くなってから館を出ています。',
+        character: 'witness_miura',
+        next: 'defense_cross_miura_menu'
+    },
+
+    {
+        id: 'ask_miura_route',
+        speaker: '弁護士（あなた）',
+        text: '巡回ルートについて教えてください。特に応接間付近は？',
+        character: 'defense_attorney',
+        next: 'miura_reply_route'
+    },
+
+    {
+        id: 'miura_reply_route',
+        speaker: '証人（三浦）',
+        text: '応接間前の廊下は巡回ルートに含まれています。倉庫や裏口へ行くには必ず通ります。',
+        character: 'witness_miura',
+        next: 'defense_cross_miura_menu'
+    },
+
+    // -----------------------------------------
+    // 「違和感」伏線
+    // -----------------------------------------
+
+    {
+        id: 'defense_flag_miura_1',
+        speaker: '弁護士（あなた）',
+        text: '（応接間は三浦が出たあと“誰も入れない状態”になったはずだ……だが、銀杯は消えている）',
+        character: 'defense_attorney',
+        next: 'defense_flag_miura_2'
+    },
+
+    {
+        id: 'defense_flag_miura_2',
+        speaker: '弁護士（あなた）',
+        text: '（三浦は嘘をついている……？ いや、彼は動揺が見られない。むしろ——事件の“仕組み”を知らない側の顔だ）',
+        character: 'defense_attorney',
+        next: 'defense_flag_miura_3'
+    },
+
+    {
+        id: 'defense_flag_miura_3',
+        speaker: '弁護士（あなた）',
+        text: '（となると、“別の侵入経路”が存在していたはずだ……！）',
+        character: 'defense_attorney',
+        next: 'defense_transition_next_chapter'
+    },
+
+    {
+        id: 'defense_transition_next_chapter',
+        speaker: '弁護士（あなた）',
+        text: '（老人会館の構造……倉庫……裏口……そして“応接間の隣室”……次の証拠提示で矛盾を突けるはずだ）',
+        character: 'defense_attorney',
+        next: 'chapter2_end'
+    },
+
+    {
+        id: 'chapter2_end',
+        speaker: 'システム',
+        text: '【第2章終了】 次の章で、応接間の“本当の侵入トリック”が明らかになる……！',
+        character: null,
+        next: null
+    },
+
+    // ============================================================================
+// 第3章：応接間の“隠された侵入ルート”を暴く
+// ============================================================================
+
+    {
+        id: 'chapter3_start',
+        speaker: '裁判長',
+        text: 'それでは、次の論点に移りましょう。応接間への侵入経路についてです。',
+        character: 'judge',
+        next: 'defense_ch3_intro'
+    },
+
+    {
+        id: 'defense_ch3_intro',
+        speaker: '弁護士（あなた）',
+        text: '（三浦の証言を疑うよりも、“構造そのもの”が怪しい……応接間には“もう一つの扉”があったはずだ）',
+        character: 'defense_attorney',
+        next: 'defense_ch3_intro2'
+    },
+
+    {
+        id: 'defense_ch3_intro2',
+        speaker: '弁護士（あなた）',
+        text: '（老人会館の図面……倉庫……裏口……そうだ、応接間の真横には“旧資料室”があった）',
+        character: 'defense_attorney',
+        next: 'defense_ch3_menu'
+    },
+
+    {
+        id: 'defense_ch3_menu',
+        speaker: '弁護士（あなた）',
+        text: '（どこから矛盾を突くべきだ？）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '応接間と資料室の位置関係', next: 'ask_structure' },
+            { text: '老人会館の防犯体制', next: 'ask_security' },
+            { text: '夜間の出入り口について', next: 'ask_night_entrance' },
+            { text: '倉庫の利用状況について', next: 'ask_storage_usage' }
+        ]
+    },
+
+    {
+        id: 'ask_structure',
+        speaker: '弁護士（あなた）',
+        text: '応接間の隣には、旧資料室があったはずですね？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_structure'
+    },
+
+    {
+        id: 'kuro_reply_structure',
+        speaker: '証人（黒川）',
+        text: 'ああ。昔は使っとったが今は荷物置きじゃな。鍵も壊れて閉まらん。',
+        character: 'witness_kurokawa',
+        next: 'defense_ch3_menu'
+    },
+
+    {
+        id: 'ask_security',
+        speaker: '弁護士（あなた）',
+        text: '防犯カメラはどこに設置されていますか？',
+        character: 'defense_attorney',
+        next: 'miura_reply_security'
+    },
+
+    {
+        id: 'miura_reply_security',
+        speaker: '証人（三浦）',
+        text: '正面玄関と裏口だけです。廊下や資料室付近にはありません。',
+        character: 'witness_miura',
+        next: 'defense_ch3_menu'
+    },
+
+    {
+        id: 'ask_night_entrance',
+        speaker: '弁護士（あなた）',
+        text: '夜間、老人会館には誰でも入れますか？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_night'
+    },
+
+    {
+        id: 'kuro_reply_night',
+        speaker: '証人（黒川）',
+        text: '裏口がオートロックじゃが……正直、調子が悪くて閉まらん日もある。',
+        character: 'witness_kurokawa',
+        next: 'defense_ch3_menu'
+    },
+
+    {
+        id: 'ask_storage_usage',
+        speaker: '弁護士（あなた）',
+        text: '倉庫は事件当日、使われていましたか？',
+        character: 'defense_attorney',
+        next: 'miura_reply_storage'
+    },
+
+    {
+        id: 'miura_reply_storage',
+        speaker: '証人（三浦）',
+        text: 'ええ。古い道具を整理していました。資料室の横を何度も通っています。',
+        character: 'witness_miura',
+        next: 'defense_ch3_menu'
+    },
+
+    // ----------------------------------------------
+    // 真実に近づく“違和感”フェーズ
+    // ----------------------------------------------
+
+    {
+        id: 'defense_ch3_flag_1',
+        speaker: '弁護士（あなた）',
+        text: '（資料室の鍵が壊れている……防犯カメラは玄関と裏口のみ……資料室の横を通る三浦……）',
+        character: 'defense_attorney',
+        next: 'defense_ch3_flag_2'
+    },
+
+    {
+        id: 'defense_ch3_flag_2',
+        speaker: '弁護士（あなた）',
+        text: '（資料室は応接間と壁一枚……もし、壁に“何らかの仕掛け”があれば……）',
+        character: 'defense_attorney',
+        next: 'defense_ch3_flag_3'
+    },
+
+    {
+        id: 'defense_ch3_flag_3',
+        speaker: '弁護士（あなた）',
+        text: '（証拠の中に“壁の異変”を示すものがあったはずだ……）',
+        character: 'defense_attorney',
+        next: 'defense_ch3_present_menu'
+    },
+
+    // ----------------------------------------------
+    // 証拠提示（ここで“隠し侵入ルート”を突きつける）
+    // ----------------------------------------------
+
+    {
+        id: 'defense_ch3_present_menu',
+        speaker: '弁護士（あなた）',
+        text: '（さて……応接間と資料室が“繋がっていた”ことを示す証拠はどれだ……？）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '資料室の古い壁板の写真を見せる', action: 'present_evidence', next: 'present_wallboard' },
+            { text: '銀杯の配置図を見せる', action: 'present_evidence', next: 'present_cup_map' },
+            { text: '防犯カメラの死角リストを見せる', action: 'present_evidence', next: 'present_camera_blind' },
+            { text: '式典用の紅白幕の写真を見せる', action: 'present_evidence', next: 'present_curtain' },
+            { text: '倉庫の出入記録を見せる', action: 'present_evidence', next: 'present_storage_log' },
+            { text: '老人会館の改修工事報告書を見せる', action: 'present_evidence', next: 'present_renovation' }
+        ],
+        // 正解：古い壁板の写真
+        correctEvidence: 'old_wallboard',
+        successNext: 'present_wallboard',
+        failureNext: 'present_wallboard_wrong'
+    },
+
+    {
+        id: 'present_wallboard_wrong',
+        speaker: '裁判長',
+        text: '弁護人、それがこの論点とどう関係するのですか？',
+        character: 'judge',
+        next: 'defense_ch3_present_menu'
+    },
+
+    // ----------------------------------------------
+    // ★ 正解ルート（異議あり）
+    // ----------------------------------------------
+
+    {
+        id: 'present_wallboard',
+        speaker: '弁護士（あなた）',
+        text: 'この写真をご覧ください。「旧資料室の古い壁板」です。',
+        character: 'defense_attorney',
+        cutIn: 'objection',   // ★正解のみ異議あり
+        next: 'present_wallboard_2'
+    },
+
+    {
+        id: 'present_wallboard_2',
+        speaker: '弁護士（あなた）',
+        text: '壁板の裏には、大きな“空洞”があります。これは、かつて応接間と資料室を繋いでいた“旧押し入れ”の痕跡です。',
+        character: 'defense_attorney',
+        next: 'present_wallboard_3'
+    },
+
+    {
+        id: 'present_wallboard_3',
+        speaker: '弁護士（あなた）',
+        text: 'つまり——資料室側から壁板を外すことで、応接間のガラス棚の裏に直接手が届く状態だったのです！',
+        character: 'defense_attorney',
+        next: 'courtroom_reactions_1'
+    },
+
+    {
+        id: 'courtroom_reactions_1',
+        speaker: '検察官',
+        text: 'な……なんだと！？',
+        character: 'prosecutor',
+        next: 'courtroom_reactions_2'
+    },
+
+    {
+        id: 'courtroom_reactions_2',
+        speaker: '証人（三浦）',
+        text: 'そ、そんな場所……僕は知りませんでした……！',
+        character: 'witness_miura',
+        next: 'courtroom_reactions_3'
+    },
+
+    {
+        id: 'courtroom_reactions_3',
+        speaker: '証人（黒川）',
+        text: 'む、昔は確かに押し入れがあったが……まさかまだ内部が繋がっとったとは……！',
+        character: 'witness_kurokawa',
+        next: 'defense_wall_conclusion'
+    },
+
+    {
+        id: 'defense_wall_conclusion',
+        speaker: '弁護士（あなた）',
+        text: 'はい。つまり“鍵を持っていない人物”でも、資料室から応接間へ腕を伸ばし、銀杯を盗み出せたのです。',
+        character: 'defense_attorney',
+        next: 'defense_wall_conclusion_2'
+    },
+
+    {
+        id: 'defense_wall_conclusion_2',
+        speaker: '弁護士（あなた）',
+        text: 'そして……この侵入ルートを知っていた人物は、老人会関係者の中でも一人だけ。',
+        character: 'defense_attorney',
+        next: 'chapter3_end'
+    },
+
+    {
+        id: 'chapter3_end',
+        speaker: 'システム',
+        text: '【第3章終了】 応接間と資料室の“隠し通路”が明らかになり、事件は新たな局面へ……！',
+        character: null,
+        next: null
+    },
+
+// ============================================================================
+// 第4章：黒川会長──沈黙の裏に潜む真実
+// ============================================================================
+
+
+    {
+        id: 'chapter4_start',
+        speaker: '裁判長',
+        text: '続いて、再び老人会会長の黒川氏に質問を行います。',
+        character: 'judge',
+        next: 'defense_ch4_intro'
+    },
+
+    {
+        id: 'defense_ch4_intro',
+        speaker: '弁護士（あなた）',
+        text: '（隠し通路の存在を一番知っていておかしくない人物……その一人が黒川会長だ）',
+        character: 'defense_attorney',
+        next: 'defense_ch4_intro2'
+    },
+
+    {
+        id: 'defense_ch4_intro2',
+        speaker: '弁護士（あなた）',
+        text: '（ただし、いきなり犯行を問えば反発される。まずは“矛盾の積み上げ”だ……）',
+        character: 'defense_attorney',
+        next: 'defense_ch4_menu'
+    },
+
+    // -------------------------------------------------------
+    // 会長への反対尋問メニュー
+    // -------------------------------------------------------
+
+    {
+        id: 'defense_ch4_menu',
+        speaker: '弁護士（あなた）',
+        text: '（黒川の証言……どこから崩す？）',
+        character: 'defense_attorney',
+        choices: [
+            { text: 'イベント当日の動きについて', next: 'ask_kuro_event' },
+            { text: '銀杯の管理体制について', next: 'ask_kuro_cup' },
+            { text: '資料室の用途について聞く', next: 'ask_kuro_storage' },
+            { text: '夜間の巡回を把握していたのか', next: 'ask_kuro_patrol' }
+        ]
+    },
+
+    {
+        id: 'ask_kuro_event',
+        speaker: '弁護士（あなた）',
+        text: '事件当日の会長の動きを改めて確認したいのですが。',
+        character: 'defense_attorney',
+        next: 'kuro_reply_event'
+    },
+
+    {
+        id: 'kuro_reply_event',
+        speaker: '証人（黒川）',
+        text: 'わしは午後から近所の集金に行っておった。式典準備で忙しかったからな。',
+        character: 'witness_kurokawa',
+        next: 'defense_ch4_menu'
+    },
+
+    {
+        id: 'ask_kuro_cup',
+        speaker: '弁護士（あなた）',
+        text: '銀杯は日頃、どのように管理されていましたか？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_cup'
+    },
+
+    {
+        id: 'kuro_reply_cup',
+        speaker: '証人（黒川）',
+        text: '鍵付きの棚じゃ。儀式以外では基本触らん。',
+        character: 'witness_kurokawa',
+        next: 'defense_ch4_menu'
+    },
+
+    {
+        id: 'ask_kuro_storage',
+        speaker: '弁護士（あなた）',
+        text: '旧資料室のことですが、会長は普段あの部屋をご覧になりますか？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_storage'
+    },
+
+    {
+        id: 'kuro_reply_storage',
+        speaker: '証人（黒川）',
+        text: 'いや、あそこは物置同然じゃ。わしは入らん。',
+        character: 'witness_kurokawa',
+        next: 'defense_ch4_menu'
+    },
+
+    {
+        id: 'ask_kuro_patrol',
+        speaker: '弁護士（あなた）',
+        text: '夜間の巡回について、会長はどれほど把握していたのですか？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_patrol'
+    },
+
+    {
+        id: 'kuro_reply_patrol',
+        speaker: '証人（黒川）',
+        text: '三浦が全部やってくれておる。わしが口出すことはない。',
+        character: 'witness_kurokawa',
+        next: 'defense_ch4_menu'
+    },
+
+    // -------------------------------------------
+    // ★ 不自然な証言を積み上げる（伏線）
+    // -------------------------------------------
+
+    {
+        id: 'defense_ch4_flag_1',
+        speaker: '弁護士（あなた）',
+        text: '（会長は“資料室には入らない”と言い切った……）',
+        character: 'defense_attorney',
+        next: 'defense_ch4_flag_2'
+    },
+
+    {
+        id: 'defense_ch4_flag_2',
+        speaker: '弁護士（あなた）',
+        text: '（しかし、隠し通路を知るには“資料室の壁構造”を知っている必要がある……！）',
+        character: 'defense_attorney',
+        next: 'defense_ch4_flag_3'
+    },
+
+    {
+        id: 'defense_ch4_flag_3',
+        speaker: '弁護士（あなた）',
+        text: '（嘘……というより、“言っていないことがある”。証拠でそこを突く……！）',
+        character: 'defense_attorney',
+        next: 'defense_ch4_present_menu'
+    },
+
+    // -------------------------------------------
+    // 証拠提示（正解は1つだけ）
+    // -------------------------------------------
+
+    {
+        id: 'defense_ch4_present_menu',
+        speaker: '弁護士（あなた）',
+        text: '（さて……会長の証言に矛盾を生む“決定的証拠”は……どれだ？）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '資料室の古い鍵', action: 'present_evidence', next: 'present_old_key' },
+            { text: '応接間の配置図', action: 'present_evidence', next: 'present_roommap' },
+            { text: '改修工事の報告書', action: 'present_evidence', next: 'present_renovation_info' },
+            { text: '銀杯の写真（式典用）', action: 'present_evidence', next: 'present_cup_photo' },
+            { text: '倉庫の棚卸し記録', action: 'present_evidence', next: 'present_stock_log' },
+            { text: '館内の古い避難経路図', action: 'present_evidence', next: 'present_old_escape' }
+        ],
+        correctEvidence: 'renovation_report',
+        successNext: 'present_renovation_info',
+        failureNext: 'present_evidence_wrong4'
+    },
+
+    {
+        id: 'present_evidence_wrong4',
+        speaker: '裁判長',
+        text: '弁護人、その証拠品が会長の証言とどう関係するのですか？',
+        character: 'judge',
+        next: 'defense_ch4_present_menu'
+    },
+
+    // -------------------------------------------
+    // ★ 正解ルート（異議あり）
+    // -------------------------------------------
+
+    {
+        id: 'present_renovation_info',
+        speaker: '弁護士（あなた）',
+        text: '会長……あなたは“この報告書”に目を通しているはずです。',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'present_renovation_info2'
+    },
+
+    {
+        id: 'present_renovation_info2',
+        speaker: '弁護士（あなた）',
+        text: '『老人会館 改修工事報告書（平成14年度）』。ここに“旧資料室の壁板剥離の注意”とありますね。',
+        character: 'defense_attorney',
+        next: 'present_renovation_info3'
+    },
+
+    {
+        id: 'present_renovation_info3',
+        speaker: '弁護士（あなた）',
+        text: 'つまり——あなたは“資料室の壁構造に詳しかった”のです！',
+        character: 'defense_attorney',
+        next: 'court_ch4_react_1'
+    },
+
+    {
+        id: 'court_ch4_react_1',
+        speaker: '証人（黒川）',
+        text: 'む……むぅ……',
+        character: 'witness_kurokawa',
+        next: 'court_ch4_react_2'
+    },
+
+    {
+        id: 'court_ch4_react_2',
+        speaker: '検察官',
+        text: '会長、それは明らかな矛盾では？',
+        character: 'prosecutor',
+        next: 'court_ch4_react_3'
+    },
+
+    {
+        id: 'court_ch4_react_3',
+        speaker: '証人（三浦）',
+        text: '会長……僕にはそんな話、一度も……',
+        character: 'witness_miura',
+        next: 'defense_ch4_push'
+    },
+
+    {
+        id: 'defense_ch4_push',
+        speaker: '弁護士（あなた）',
+        text: '会長、あなたは資料室に“入ったことがない”のではなく、入ったことを“言えなかった”のではありませんか？',
+        character: 'defense_attorney',
+        next: 'defense_ch4_push2'
+    },
+
+    {
+        id: 'defense_ch4_push2',
+        speaker: '弁護士（あなた）',
+        text: '銀杯が消えた理由、その動機……あなたには、隠す理由がある。',
+        character: 'defense_attorney',
+        next: 'chapter4_end'
+    },
+
+    {
+        id: 'chapter4_end',
+        speaker: 'システム',
+        text: '【第4章終了】 会長の“隠してきた真実”が、いよいよ姿を見せ始める……。',
+        character: null,
+        next: null
+    },
+    // ============================================================================
+// 第5章（最終章）：真犯人追い詰め・銀杯の行方・動機
+// ============================================================================
+
+    {
+        id: 'chapter5_start',
+        speaker: '裁判長',
+        text: '弁護人、これより最終尋問に入りなさい。',
+        character: 'judge',
+        next: 'defense_ch5_intro'
+    },
+
+    {
+        id: 'defense_ch5_intro',
+        speaker: '弁護士（あなた）',
+        text: '（黒川会長は改修工事報告書を読んでいた。つまり……壁の構造を知っていた。動機の核心に迫る時だ）',
+        character: 'defense_attorney',
+        next: 'defense_ch5_intro2'
+    },
+
+    {
+        id: 'defense_ch5_intro2',
+        speaker: '弁護士（あなた）',
+        text: '（しかし、会長はまだ“銀杯がどこに行ったか”を語っていない。そこを暴ければ、この裁判は決着する……）',
+        character: 'defense_attorney',
+        next: 'defense_ch5_menu'
+    },
+
+    // ----------------------------------------
+    // 最終尋問メニュー（正解は1つ）
+    // ----------------------------------------
+
+    {
+        id: 'defense_ch5_menu',
+        speaker: '弁護士（あなた）',
+        text: '（どの点を問い詰めれば、会長の嘘が崩れる……？）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '銀杯が消えた“時間”に注目する', next: 'ask_time' },
+            { text: '銀杯の“保管場所”の矛盾を突く', next: 'ask_place' },
+            { text: '会長の“財務状況”について質問する', next: 'ask_finance' },
+            { text: '式典準備での“不可解な行動”を問う', next: 'ask_behavior' }
+        ]
+    },
+
+    // -----------------------------
+    // 1. 時間について
+    // -----------------------------
+
+    {
+        id: 'ask_time',
+        speaker: '弁護士（あなた）',
+        text: '銀杯は“いつ”盗まれたと考えますか？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_time'
+    },
+
+    {
+        id: 'kuro_reply_time',
+        speaker: '証人（黒川）',
+        text: 'それは……わからん。誰かが夜に忍び込んだのじゃろう。',
+        character: 'witness_kurokawa',
+        next: 'defense_ch5_menu'
+    },
+
+    // -----------------------------
+    // 2. 保管場所について
+    // -----------------------------
+
+    {
+        id: 'ask_place',
+        speaker: '弁護士（あなた）',
+        text: '銀杯は当日、どの棚に展示されていましたか？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_place'
+    },
+
+    {
+        id: 'kuro_reply_place',
+        speaker: '証人（黒川）',
+        text: 'いつも通り、応接間のガラス棚の中央じゃ。',
+        character: 'witness_kurokawa',
+        next: 'defense_ch5_menu'
+    },
+
+    // -----------------------------
+    // 3. 財務について（正解の伏線）
+    // -----------------------------
+
+    {
+        id: 'ask_finance',
+        speaker: '弁護士（あなた）',
+        text: '老人会の財務について、最近問題はありませんでしたか？',
+        character: 'defense_attorney',
+        next: 'kuro_reply_finance'
+    },
+
+    {
+        id: 'kuro_reply_finance',
+        speaker: '証人（黒川）',
+        text: 'な、なぜそんなことを聞く……？ 財務は……その……',
+        character: 'witness_kurokawa',
+        next: 'defense_ch5_menu'
+    },
+
+    // -----------------------------
+    // 4. 不可解な行動について（正解へ誘導）
+    // -----------------------------
+
+    {
+        id: 'ask_behavior',
+        speaker: '弁護士（あなた）',
+        text: '会長。式典準備中、あなたは“ある不可解な行動”を取っています。',
+        character: 'defense_attorney',
+        next: 'kuro_reply_behavior'
+    },
+
+    {
+        id: 'kuro_reply_behavior',
+        speaker: '証人（黒川）',
+        text: 'なんのことじゃ……？ わしは指示しただけじゃ……',
+        character: 'witness_kurokawa',
+        next: 'defense_ch5_present_menu'
+    },
+
+    // ----------------------------------------
+    // ★ 証拠提示：銀杯の“隠し場所”を示す証拠を出す
+    // ----------------------------------------
+
+    {
+        id: 'defense_ch5_present_menu',
+        speaker: '弁護士（あなた）',
+        text: '（不可解な行動……それを裏付けるのは、あの証拠しかない）',
+        character: 'defense_attorney',
+        choices: [
+            { text: '旧資料室の空洞写真', action: 'present_evidence', next: 'present_hole' },
+            { text: '改修工事報告書（再）', action: 'present_evidence', next: 'present_renovation_again' },
+            { text: '館内の避難経路図', action: 'present_evidence', next: 'present_escape_map' },
+            { text: '倉庫の棚卸し記録', action: 'present_evidence', next: 'present_stock_final' },
+            { text: '銀杯の古い台座写真', action: 'present_evidence', next: 'present_pedestal' },
+            { text: '式典準備表のメモ', action: 'present_evidence', next: 'present_preplist' }
+        ],
+        correctEvidence: 'pedestal_photo',
+        successNext: 'present_pedestal',
+        failureNext: 'present_wrong_ch5'
+    },
+
+    {
+        id: 'present_wrong_ch5',
+        speaker: '裁判長',
+        text: '弁護人、その証拠では説明が不十分です。',
+        character: 'judge',
+        next: 'defense_ch5_present_menu'
+    },
+
+    // ----------------------------------------
+    // ★ 正解：台座写真 → “台座だけ動かされていた”
+    // ----------------------------------------
+
+    {
+        id: 'present_pedestal',
+        speaker: '弁護士（あなた）',
+        text: '会長……これをご覧ください。銀杯の“古い台座”の写真です。',
+        character: 'defense_attorney',
+        cutIn: 'objection',
+        next: 'present_pedestal_2'
+    },
+
+    {
+        id: 'present_pedestal_2',
+        speaker: '弁護士（あなた）',
+        text: '事件当日、この台座——“位置がずれていた”んです！',
+        character: 'defense_attorney',
+        next: 'present_pedestal_3'
+    },
+
+    {
+        id: 'present_pedestal_3',
+        speaker: '弁護士（あなた）',
+        text: 'これは、銀杯が“事前に移動されていた”証拠です！',
+        character: 'defense_attorney',
+        next: 'court_ch5_react1'
+    },
+
+    {
+        id: 'court_ch5_react1',
+        speaker: '検察官',
+        text: 'な、なんですって！？',
+        character: 'prosecutor',
+        next: 'court_ch5_react2'
+    },
+
+    {
+        id: 'court_ch5_react2',
+        speaker: '証人（三浦）',
+        text: 'そんな……僕、気づきませんでした……！',
+        character: 'witness_miura',
+        next: 'court_ch5_react3'
+    },
+
+    {
+        id: 'court_ch5_react3',
+        speaker: '証人（黒川）',
+        text: '……！！',
+        character: 'witness_kurokawa',
+        next: 'defense_ch5_confront'
+    },
+
+    // ----------------------------------------
+    // ★ 会長を直撃する問い
+    // ----------------------------------------
+
+    {
+        id: 'defense_ch5_confront',
+        speaker: '弁護士（あなた）',
+        text: '会長。あなたは銀杯を“盗んでいない”のではない……',
+        character: 'defense_attorney',
+        next: 'defense_ch5_confront2'
+    },
+
+    {
+        id: 'defense_ch5_confront2',
+        speaker: '弁護士（あなた）',
+        text: 'あなたは“銀杯を守ろうとした”のではありませんか？',
+        character: 'defense_attorney',
+        next: 'kuro_break1'
+    },
+
+    // ----------------------------------------
+    // ★ 会長の崩壊・動機
+    // ----------------------------------------
+
+    {
+        id: 'kuro_break1',
+        speaker: '証人（黒川）',
+        text: '………………',
+        character: 'witness_kurokawa',
+        next: 'kuro_break2'
+    },
+
+    {
+        id: 'kuro_break2',
+        speaker: '証人（黒川）',
+        text: '……銀杯は……売るつもりだった……',
+        character: 'witness_kurokawa',
+        next: 'kuro_break3'
+    },
+
+    {
+        id: 'kuro_break3',
+        speaker: '証人（黒川）',
+        text: '老人会の積立金が底をついとったんじゃ……！ 皆を巻き込みたくなくて……',
+        character: 'witness_kurokawa',
+        next: 'kuro_break4'
+    },
+
+    {
+        id: 'kuro_break4',
+        speaker: '証人（黒川）',
+        text: 'だから……床下の収納に隠した。資料室から手を伸ばして……',
+        character: 'witness_kurokawa',
+        next: 'defense_ch5_final'
+    },
+
+    // ----------------------------------------
+    // 最終まとめ
+    // ----------------------------------------
+
+    {
+        id: 'defense_ch5_final',
+        speaker: '弁護士（あなた）',
+        text: 'つまり——銀杯は“盗まれた”のではなく、“会長が自ら隠した”。被告ミナミには関与の余地はありません。',
+        character: 'defense_attorney',
+        next: 'judge_final_verdict'
+    },
+
+    {
+        id: 'judge_final_verdict',
+        speaker: '裁判長',
+        text: '判決。被告ミナミを無罪とする！　銀杯は後ほど回収され、老人会の総意により処遇を決めるものとする。',
+        character: 'judge',
+        next: 'ending_scene'
+    },
+
+    {
+        id: 'ending_scene',
+        speaker: 'システム',
+        text: '【裁判終了】 あなたは老人会百周年の家宝「銀杯」をめぐる事件を見事に解決した！',
+        character: null,
+        next: null
+    }
+
+]
+
+const evidenceList = [
+
+    // ----------------------------------------------------------
+    // ★★【使用可能な重要証拠（4つ）】★★
+    // ----------------------------------------------------------
+
+    {
+        id: 'old_wallboard',
+        name: '旧資料室の壁板写真',
+        description: '旧資料室の壁板が古く剥離しており、裏に大きな空洞が存在することを示す写真。応接間と繋がる隠し通路の証拠となる。',
+        image: 'evidence_wallboard.png'
+    },
+
+    {
+        id: 'renovation_report',
+        name: '改修工事報告書',
+        description: '平成14年度の改修工事報告書。旧資料室の壁構造について詳細が記されており、黒川会長が“壁の仕組みを知っていた”ことの裏付けとなる。',
+        image: 'evidence_report.png'
+    },
+
+    {
+        id: 'pedestal_photo',
+        name: '銀杯の古い台座の写真',
+        description: '事件当日に台座の位置が微妙にずれていたことがわかる写真。銀杯が事前に移されていた決定的証拠。',
+        image: 'evidence_pedestal.png'
+    },
+
+    {
+        id: 'hole_storage',
+        name: '応接間床下収納の写真',
+        description: '応接間の床下に存在する隠し収納。通常は使われていないが、物を隠すのに十分なスペースがある。銀杯の最終的な隠し場所。',
+        image: 'evidence_floorstorage.png'
+    },
+
+    // ----------------------------------------------------------
+    // ★★【ミスリード（使用不可）フェイク証拠（2つ）】★★
+    // ----------------------------------------------------------
+
+    {
+        id: 'event_flyer',
+        name: '百周年式典のチラシ',
+        description: '当日の式典内容が書かれたチラシ。今回の事件との直接的な関連性は薄い。',
+        image: 'evidence_flyer.png'
+    },
+
+    {
+        id: 'old_key',
+        name: '資料室の古い鍵',
+        description: '資料室の鍵として使われていたもの。しかし現在は壊れており、事件とは直接関係しない。',
+        image: 'evidence_key.png'
+    }
+
+];
+

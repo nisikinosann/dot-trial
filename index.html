@@ -29,6 +29,23 @@
                 <img id="cut-in-image" src="assets/images/objection_bubble.png" alt="Objection!">
             </div>
 
+            <!-- Log UI -->
+            <button id="log-btn">ログ</button>
+
+            <div id="log-modal" class="hidden">
+                <div class="modal-content log-content">
+                    <div class="modal-header">
+                        <h2>バックログ</h2>
+                        <button id="close-log">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <ul id="log-list">
+                            <!-- Logs will be injected here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <!-- Evidence UI -->
             <img id="evidence-btn" src="assets/images/evidence-watch.png" alt="証拠品">
 
@@ -36,13 +53,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h2>証拠品ファイル</h2>
-                        <button id="close-evidence">×</button>
+                        <button id="close-evidence">&times;</button>
                     </div>
                     <div class="modal-body">
                         <ul id="evidence-list">
-                            <!-- Items injected here -->
+                            <!-- Evidence items will be injected here -->
                         </ul>
                         <div id="evidence-detail">
+                            <img id="detail-image" class="hidden" src="" alt="Evidence Detail">
                             <h3 id="detail-name"></h3>
                             <p id="detail-desc">証拠品を選択してください。</p>
                         </div>
@@ -51,6 +69,7 @@
             </div>
         </div>
     </div>
+
     <script src="scenario.js"></script>
     <script src="script.js"></script>
 </body>

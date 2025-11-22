@@ -14,6 +14,13 @@ class GameEngine {
         this.nextIndicator = document.getElementById('next-indicator');
         this.dialogueBox = document.getElementById('dialogue-box');
 
+        // Log System
+        this.logBtn = document.getElementById('log-btn');
+        this.logModal = document.getElementById('log-modal');
+        this.logList = document.getElementById('log-list');
+        this.closeLogBtn = document.getElementById('close-log');
+        this.logHistory = [];
+
         // Audio Context (initialized on user interaction)
         this.audioCtx = null;
 
@@ -41,6 +48,22 @@ class GameEngine {
             }
         }, { once: true });
 
+        // Log Event Listeners
+        if (this.logBtn) {
+            this.logBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.renderLog();
+                this.toggleLog(true);
+            });
+        }
+
+        if (this.closeLogBtn) {
+            this.closeLogBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggleLog(false);
+            });
+        }
+
         this.initEvidenceSystem();
     }
 
@@ -58,6 +81,17 @@ class GameEngine {
     }
 
     renderBlock() {
+        // Add to log history
+        if (this.currentBlock) {
+            this.logHistory.push({
+                speaker: this.currentBlock.speaker,
+                text: this.currentBlock.text
+            });
+            if (this.logHistory.length > 30) {
+                this.logHistory.shift();
+            }
+        }
+
         // Clear previous state
         this.choicesContainer.innerHTML = '';
         this.choicesContainer.classList.add('hidden');
@@ -135,10 +169,89 @@ class GameEngine {
             btn.textContent = choice.text;
             btn.onclick = (e) => {
                 e.stopPropagation(); // Prevent dialogue box click
-                this.goToBlock(choice.next);
+                if (choice.action === 'present_evidence') {
+                    this.startEvidenceSelection();
+                } else {
+                    this.goToBlock(choice.next);
+                }
             };
             this.choicesContainer.appendChild(btn);
         });
+    }
+
+    startEvidenceSelection() {
+        // Hide choices temporarily
+        this.choicesContainer.classList.add('hidden');
+        // Open evidence modal in selection mode
+        this.toggleEvidence(true, true);
+    }
+
+    toggleEvidence(show, isSelectionMode = false) {
+        this.isEvidenceSelectionMode = isSelectionMode;
+
+        if (show) {
+            this.evidenceModal.classList.remove('hidden');
+            this.renderEvidenceList();
+
+            // Add visual cue for selection mode
+            if (isSelectionMode) {
+                this.evidenceModal.classList.add('selection-mode');
+                // Add a "Present" button if not exists
+                if (!document.getElementById('present-btn')) {
+                    const presentBtn = document.createElement('button');
+                    presentBtn.id = 'present-btn';
+                    presentBtn.textContent = 'つきつける';
+                    presentBtn.className = 'choice-btn';
+                    presentBtn.style.marginTop = '20px';
+                    presentBtn.style.width = '100%';
+                    presentBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        this.presentSelectedEvidence();
+                    };
+                    document.getElementById('evidence-detail').appendChild(presentBtn);
+                }
+            } else {
+                this.evidenceModal.classList.remove('selection-mode');
+                const presentBtn = document.getElementById('present-btn');
+                if (presentBtn) presentBtn.remove();
+            }
+        } else {
+            this.evidenceModal.classList.add('hidden');
+            this.evidenceModal.classList.remove('selection-mode');
+            const presentBtn = document.getElementById('present-btn');
+            if (presentBtn) presentBtn.remove();
+
+            // If we were in selection mode and cancelled (closed), show choices again
+            if (this.isEvidenceSelectionMode) {
+                this.choicesContainer.classList.remove('hidden');
+                this.isEvidenceSelectionMode = false;
+            }
+        }
+    }
+
+    presentSelectedEvidence() {
+        const selectedItem = this.selectedEvidenceItem;
+        if (!selectedItem) {
+            alert('証拠品を選んでください');
+            return;
+        }
+
+        // Check if correct
+        const correctId = this.currentBlock.correctEvidence;
+
+        if (selectedItem.id === correctId) {
+            // Correct!
+            this.toggleEvidence(false); // Close modal
+            this.playObjectionSound();
+            this.showCutIn('objection', () => {
+                this.goToBlock(this.currentBlock.successNext);
+            });
+        } else {
+            // Incorrect
+            this.toggleEvidence(false); // Close modal
+            // Go to failure route
+            this.goToBlock(this.currentBlock.failureNext);
+        }
     }
 
     playBlip() {
@@ -164,44 +277,13 @@ class GameEngine {
 
     playObjectionSound() {
         if (!this.audioCtx) return;
-
-        // Dramatic "Objection!" sound (Synth)
-        const t = this.audioCtx.currentTime;
-
-        // Low impact
-        const osc1 = this.audioCtx.createOscillator();
-        const gain1 = this.audioCtx.createGain();
-        osc1.type = 'sawtooth';
-        osc1.frequency.setValueAtTime(150, t);
-        osc1.frequency.exponentialRampToValueAtTime(50, t + 0.3);
-        gain1.gain.setValueAtTime(0.5, t);
-        gain1.gain.exponentialRampToValueAtTime(0.01, t + 0.3);
-        osc1.connect(gain1);
-        gain1.connect(this.audioCtx.destination);
-        osc1.start(t);
-        osc1.stop(t + 0.3);
-
-        // High screech
-        const osc2 = this.audioCtx.createOscillator();
-        const gain2 = this.audioCtx.createGain();
-        osc2.type = 'square';
-        osc2.frequency.setValueAtTime(800, t);
-        osc2.frequency.exponentialRampToValueAtTime(400, t + 0.2);
-        gain2.gain.setValueAtTime(0.3, t);
-        gain2.gain.exponentialRampToValueAtTime(0.01, t + 0.2);
-        osc2.connect(gain2);
-        gain2.connect(this.audioCtx.destination);
-        osc2.start(t);
-        osc2.stop(t + 0.2);
     }
 
     showCutIn(type, callback) {
         const overlay = document.getElementById('cut-in-overlay');
-        const img = document.getElementById('cut-in-image');
-        const img2 = document.getElementById('defense-objection');
 
-        // Set image source based on type if we had multiple
-        // img.src = `assets/images/${type}.png`;
+        // Reset animations
+        overlay.classList.remove('active');
 
         const clickSound = new Audio('assets/audio/objection-voice.mp3');
         clickSound.play();
@@ -223,6 +305,7 @@ class GameEngine {
         this.evidenceListEl = document.getElementById('evidence-list');
         this.detailNameEl = document.getElementById('detail-name');
         this.detailDescEl = document.getElementById('detail-desc');
+        this.detailImageEl = document.getElementById('detail-image');
 
         if (!this.evidenceBtn || !this.evidenceModal) {
             console.warn('Evidence UI elements not found');
@@ -231,7 +314,6 @@ class GameEngine {
 
         this.evidenceBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            this.playBlip(); // Play sound
             this.toggleEvidence(true);
         });
 
@@ -246,15 +328,6 @@ class GameEngine {
         });
     }
 
-    toggleEvidence(show) {
-        if (show) {
-            this.evidenceModal.classList.remove('hidden');
-            this.renderEvidenceList();
-        } else {
-            this.evidenceModal.classList.add('hidden');
-        }
-    }
-
     renderEvidenceList() {
         this.evidenceListEl.innerHTML = '';
         // Ensure evidenceList exists (it should be in scenario.js)
@@ -265,7 +338,20 @@ class GameEngine {
 
         evidenceList.forEach(item => {
             const li = document.createElement('li');
-            li.textContent = item.name;
+
+            // Create Image
+            if (item.image) {
+                const img = document.createElement('img');
+                img.src = `assets/images/${item.image}`;
+                img.className = 'evidence-icon';
+                li.appendChild(img);
+            }
+
+            // Create Text Span
+            const span = document.createElement('span');
+            span.textContent = item.name;
+            li.appendChild(span);
+
             li.onclick = () => this.showEvidenceDetail(item, li);
             this.evidenceListEl.appendChild(li);
         });
@@ -277,9 +363,53 @@ class GameEngine {
         allLi.forEach(el => el.classList.remove('selected'));
         liElement.classList.add('selected');
 
+        this.selectedEvidenceItem = item; // Store selected item
+
         // Show details
         this.detailNameEl.textContent = item.name;
         this.detailDescEl.textContent = item.description;
+
+        if (item.image) {
+            this.detailImageEl.src = `assets/images/${item.image}`;
+            this.detailImageEl.classList.remove('hidden');
+        } else {
+            this.detailImageEl.classList.add('hidden');
+        }
+    }
+
+    // --- Log System ---
+
+    renderLog() {
+        this.logList.innerHTML = '';
+        this.logHistory.forEach(entry => {
+            const li = document.createElement('li');
+            li.className = 'log-entry';
+
+            const speakerDiv = document.createElement('div');
+            speakerDiv.className = 'log-speaker';
+            speakerDiv.textContent = entry.speaker || ' ';
+
+            const textDiv = document.createElement('div');
+            textDiv.className = 'log-text';
+            textDiv.textContent = entry.text;
+
+            li.appendChild(speakerDiv);
+            li.appendChild(textDiv);
+            this.logList.appendChild(li);
+        });
+
+        // Scroll to bottom
+        setTimeout(() => {
+            this.logList.scrollTop = this.logList.scrollHeight;
+        }, 0);
+    }
+
+    toggleLog(show) {
+        if (show) {
+            this.logModal.classList.remove('hidden');
+        } else {
+            this.logModal.classList.add('hidden');
+        }
     }
 }
 
