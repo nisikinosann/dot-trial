@@ -1342,7 +1342,7 @@ const evidenceList = [
     {
         id: 'old_vent_map',
         name: '旧通気口の図面',
-        description: '古民家の古い設計図。展示室の壁内部に“旧通気口”が残っていることがわかる重要な資料。',
+        description: '古民家の古い設計図。',
         image: 'evidence_map.png'
     },
     
