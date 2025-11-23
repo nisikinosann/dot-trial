@@ -297,15 +297,7 @@ const scenario = [
         speaker: '弁護士（あなた）',
         text: '（長坂の証言に、必ず何か矛盾が潜んでいる……次に繋がるはずだ）',
         character: 'defense_attorney',
-        next: 'chapter1_end'
-    },
-
-    {
-        id: 'chapter1_end',
-        speaker: 'システム',
-        text: '【第1部終了】 次は、第2証人：歴史サークルの大学生・川嶋の登場だ。',
-        character: null,
-        next: null
+        next: 'chapter2_start'
     },
 
     // ============================================================================
@@ -493,15 +485,7 @@ const scenario = [
         speaker: '弁護士（あなた）',
         text: '（次は、“本当に誰が展示室に入れたのか”を探る必要がある。第三証人……大工の石動だ）',
         character: 'defense_attorney',
-        next: 'chapter2_end'
-    },
-
-    {
-        id: 'chapter2_end',
-        speaker: 'システム',
-        text: '【第2部終了】次は重要人物、古民家を修繕していた大工・石動の証言だ。',
-        character: null,
-        next: null
+        next: 'chapter3_start'
     },
     // ============================================================================
     // 第3部：証人3・大工 石動（いするぎ）
@@ -696,28 +680,22 @@ const scenario = [
         text: '石動さん、あなたの証言には重大な矛盾があります──証拠を示します。',
         character: 'defense_attorney',
         choices: [
-            { text: '通気口の図面を提示する', action: 'present_evidence', evidenceId: 'old_vent_map', next: 'correct_isurugi_1' },
-            { text: '歴史サークルの出欠表を提示', action: 'present_evidence', evidenceId: 'circle_attendance', next: 'wrong_isurugi_1' },
-            { text: '観光パンフを提示', action: 'present_evidence', evidenceId: 'tourist_pamphlet', next: 'wrong_isurugi_1' }
-        ]
+            { text: '証拠品をつきつける', action: 'present_evidence' }
+        ],
+        correctEvidence: 'old_vent_map',       // ★正しい証拠
+        successNext: 'correct_isurugi_1',       // 成功ルート
+        failureNext: 'wrong_isurugi_1'          // 失敗ルート
     },
-
-    // -----------------------------------------
-    // 失敗（フェイル）
-    // -----------------------------------------
-
+    //失敗
     {
         id: 'wrong_isurugi_1',
         speaker: '裁判長',
         text: '弁護人、その証拠は本件とは関連性が薄いように思えます。',
         character: 'judge',
-        next: 'defense_present_menu_isurugi'
+        next: 'defense_cross_isurugi_menu'
     },
 
-    // -----------------------------------------
-    // 成功（異議あり発動）
-    // -----------------------------------------
-
+    //成功
     {
         id: 'correct_isurugi_1',
         speaker: '弁護士（あなた）',
@@ -756,16 +734,9 @@ const scenario = [
         speaker: '証人（石動）',
         text: '……っ、ああ……それは……！',
         character: 'witness_isurugi',
-        next: 'chapter3_end'
+        next: 'chapter4_start'
     },
 
-    {
-        id: 'chapter3_end',
-        speaker: 'システム',
-        text: '【第3部終了】通気口トリックが明らかに──いよいよ真相に近づく。',
-        character: null,
-        next: null
-    },
     // ============================================================================
     // 第4部：旧通気口トリックの実行・矛盾の結合
     // ============================================================================
@@ -992,36 +963,29 @@ const scenario = [
         speaker: '弁護士（あなた）',
         text: '（ここで“決定的矛盾”を突く……第二の証拠だ）',
         character: 'defense_attorney',
-        next: 'defense_present_menu2'
+        next: 'defense_present_evidence2'
     },
 
     {
-        id: 'defense_present_menu2',
+        id: 'defense_present_evidence2',
         speaker: '弁護士（あなた）',
         text: '石動さん──あなたの証言には、物理的に不可能な部分があります。',
         character: 'defense_attorney',
         choices: [
-            { text: '展示台の写真を提示する', action: 'present_evidence', evidenceId: 'stand_photo', next: 'correct_evidence2' },
-            { text: '歴史サークル出欠表（フェイク）', action: 'present_evidence', evidenceId: 'circle_attendance', next: 'wrong_evidence2' },
-            { text: '観光パンフ（フェイク）', action: 'present_evidence', evidenceId: 'tourist_pamphlet', next: 'wrong_evidence2' }
-        ]
+            { text: '証拠品をつきつける', action: 'present_evidence' }
+        ],
+        correctEvidence: 'stand_photo',       // ★正解の証拠
+        successNext: 'correct_evidence2',     // 成功ルート（異議あり）
+        failureNext: 'wrong_evidence2'        // 失敗ルート
     },
-
-    // -----------------------------------------
-    // 失敗
-    // -----------------------------------------
 
     {
         id: 'wrong_evidence2',
         speaker: '裁判長',
         text: '弁護人、その提示は事件の核心とは関係が薄いように思えます。',
         character: 'judge',
-        next: 'defense_present_menu2'
+        next: 'defense_cross_isurugi_menu_2'
     },
-
-    // -----------------------------------------
-    // 成功（異議あり）
-    // -----------------------------------------
 
     {
         id: 'correct_evidence2',
@@ -1031,6 +995,7 @@ const scenario = [
         cutIn: 'objection',
         next: 'isurugi_shock2'
     },
+
 
     {
         id: 'isurugi_shock2',
@@ -1061,15 +1026,7 @@ const scenario = [
         speaker: '証人（石動）',
         text: '……くっ……！ そ、それは……！',
         character: 'witness_isurugi',
-        next: 'chapter4_end'
-    },
-
-    {
-        id: 'chapter4_end',
-        speaker: 'システム',
-        text: '【第4部終了】犯人は“通気口を意図的に残した人物”──次は事件全体の総まとめ。',
-        character: null,
-        next: null
+        next: 'chapter5_start'
     },
     // ============================================================================
     // 第5部：真犯人の指摘・逆転パート
@@ -1228,7 +1185,7 @@ const scenario = [
         speaker: '弁護士（あなた）',
         text: '根拠ならあります──あなたが唯一“消せなかった痕跡”がある。',
         character: 'defense_attorney',
-        next: 'defense_present_menu_final'
+        next: 'defense_present_evidence_final'
     },
 
     // -----------------------------------------
@@ -1236,15 +1193,16 @@ const scenario = [
     // -----------------------------------------
 
     {
-        id: 'defense_present_menu_final',
+        id: 'defense_present_evidence_final',
         speaker: '弁護士（あなた）',
         text: 'その証拠を、今ここで突き付けます！',
         character: 'defense_attorney',
         choices: [
-            { text: '修繕記録を提示する', action: 'present_evidence', evidenceId: 'repair_log', next: 'correct_final_evidence' },
-            { text: '観光パンフ（フェイク）', action: 'present_evidence', evidenceId: 'tourist_pamphlet', next: 'wrong_final_evidence' },
-            { text: '出欠表（フェイク）', action: 'present_evidence', evidenceId: 'circle_attendance', next: 'wrong_final_evidence' }
-        ]
+            { text: '証拠品をつきつける', action: 'present_evidence' }
+        ],
+        correctEvidence: 'repair_log',          // ★正解の証拠
+        successNext: 'correct_final_evidence',  // 成功（異議ありルート）
+        failureNext: 'wrong_final_evidence'     // 失敗
     },
 
     // -----------------------------------------
@@ -1256,7 +1214,7 @@ const scenario = [
         speaker: '裁判長',
         text: '弁護人、その証拠は事件の核心を説明できません。',
         character: 'judge',
-        next: 'defense_present_menu_final'
+        next: 'defense_present_evidence_final'
     },
 
     // -----------------------------------------
@@ -1271,6 +1229,7 @@ const scenario = [
         cutIn: 'objection',
         next: 'isurugi_shock_final'
     },
+
 
     {
         id: 'isurugi_shock_final',
@@ -1364,45 +1323,41 @@ const evidenceList = [
     // ===============================
     // ★本物の証拠（事件解決に必要）
     // ===============================
-
+    
+    
+    {
+        id: 'tourist_pamphlet',
+        name: '観光パンフレット',
+        description: '古民家の観光パンフレット。',
+        image: 'evidence_pamphlet.png'
+    },
+    
+    {
+        id: 'repair_log',
+        name: '修繕記録',
+        description: '石動が提出した通気口修繕の記録。',
+        image: 'evidence_report.png'
+    },
+    
     {
         id: 'old_vent_map',
         name: '旧通気口の図面',
         description: '古民家の古い設計図。展示室の壁内部に“旧通気口”が残っていることがわかる重要な資料。',
         image: 'evidence_map.png'
     },
-
-    {
-        id: 'stand_photo',
-        name: '展示台の写真',
-        description: '川嶋が撮影した展示台の写真。台が微妙に斜めになっており、事前に押し動かされていた痕跡が映っている。',
-        image: 'evidence_paper.png'
-    },
-
-    {
-        id: 'repair_log',
-        name: '修繕記録',
-        description: '石動が提出した通気口修繕の記録。釘を四隅に打ったと証言しているが、実際は「2本」しか使われていない矛盾の決定的証拠。',
-        image: 'evidence_report.png'
-    },
-
-
-    // ===============================
-    // ☆フェイク証拠（ミスリード）
-    // ===============================
-
-    {
-        id: 'tourist_pamphlet',
-        name: '観光パンフレット',
-        description: '古民家の観光パンフレット。事件とは直接関連がなく、証拠としては役に立たない。',
-        image: 'evidence_paper.png'
-    },
-
+    
+    
     {
         id: 'circle_attendance',
         name: '歴史サークル出欠表',
-        description: '大学生・川嶋のサークル出欠記録。事件当日の行動とは関係せず、無関係な書類である。',
+        description: '大学生・川嶋のサークル出欠記録。',
+        image: 'evidence_attendance.png'
+    },
+    
+    {
+        id: 'stand_photo',
+        name: '展示台の写真',
+        description: '川嶋が撮影した展示台の写真。',
         image: 'evidence_paper.png'
-    }
-
+    },
 ];

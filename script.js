@@ -184,6 +184,8 @@ class GameEngine {
         this.choicesContainer.classList.add('hidden');
         // Open evidence modal in selection mode
         this.toggleEvidence(true, true);
+        this.closeEvidenceBtn.classList.add('hidden');
+        logBtn.classList.remove('hidden');
     }
 
     toggleEvidence(show, isSelectionMode = false) {
