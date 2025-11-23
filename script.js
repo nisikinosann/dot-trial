@@ -20,6 +20,8 @@ class GameEngine {
         this.logList = document.getElementById('log-list');
         this.closeLogBtn = document.getElementById('close-log');
         this.logHistory = [];
+        this.lastCharacter = null;
+        this.isCutInPlaying = false;
 
         // Audio Context (initialized on user interaction)
         this.audioCtx = null;
@@ -32,6 +34,8 @@ class GameEngine {
 
         // Advance text on click
         this.dialogueBox.addEventListener('click', () => {
+            if (this.isCutInPlaying) return; // Block interaction during cut-in
+
             if (this.isTyping) {
                 this.finishTyping();
             } else if (this.currentBlock.choices) {
@@ -114,6 +118,12 @@ class GameEngine {
     }
 
     updateCharacter(characterName) {
+        // Skip animation if the same character is speaking continuously
+        if (this.lastCharacter === characterName) {
+            return;
+        }
+        this.lastCharacter = characterName;
+
         // Clear existing characters
         this.charactersContainer.innerHTML = '';
 
@@ -250,7 +260,7 @@ class GameEngine {
         } else {
             // Incorrect
             this.toggleEvidence(false); // Close modal
-            this.closeEvidenceBtn.classList.remove('hidden');   
+            this.closeEvidenceBtn.classList.remove('hidden');
             // Go to failure route
             this.goToBlock(this.currentBlock.failureNext);
         }
@@ -291,9 +301,11 @@ class GameEngine {
         clickSound.play();
 
         overlay.classList.add('active');
+        this.isCutInPlaying = true;
 
         setTimeout(() => {
             overlay.classList.remove('active');
+            this.isCutInPlaying = false;
             if (callback) callback();
         }, 1000); // Show for 1 second
     }
@@ -328,6 +340,39 @@ class GameEngine {
         this.evidenceModal.addEventListener('click', (e) => {
             e.stopPropagation();
         });
+
+        // Image Viewer
+        this.imageViewerOverlay = document.getElementById('image-viewer-overlay');
+        this.enlargedImage = document.getElementById('enlarged-image');
+
+        // Add click listener to detail image
+        if (this.detailImageEl) {
+            this.detailImageEl.style.cursor = 'zoom-in'; // Add cursor style
+            this.detailImageEl.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (this.detailImageEl.src && !this.detailImageEl.classList.contains('hidden')) {
+                    this.showEnlargedImage(this.detailImageEl.src);
+                }
+            });
+        }
+
+        // Close viewer on click
+        if (this.imageViewerOverlay) {
+            this.imageViewerOverlay.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.hideEnlargedImage();
+            });
+        }
+    }
+
+    showEnlargedImage(src) {
+        this.enlargedImage.src = src;
+        this.imageViewerOverlay.classList.remove('hidden');
+    }
+
+    hideEnlargedImage() {
+        this.imageViewerOverlay.classList.add('hidden');
+        this.enlargedImage.src = '';
     }
 
     renderEvidenceList() {
