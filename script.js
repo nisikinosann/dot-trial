@@ -244,13 +244,13 @@ class GameEngine {
         if (selectedItem.id === correctId) {
             // Correct!
             this.toggleEvidence(false); // Close modal
+            this.closeEvidenceBtn.classList.remove('hidden');
             this.playObjectionSound();
-            this.showCutIn('objection', () => {
-                this.goToBlock(this.currentBlock.successNext);
-            });
+            this.goToBlock(this.currentBlock.successNext);
         } else {
             // Incorrect
             this.toggleEvidence(false); // Close modal
+            this.closeEvidenceBtn.classList.remove('hidden');   
             // Go to failure route
             this.goToBlock(this.currentBlock.failureNext);
         }
